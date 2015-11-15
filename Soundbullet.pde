@@ -70,7 +70,7 @@ void menuToUniverseTransition() {
 float universeToMenuScaleFactor;
 void universeToMenuTransition() {
     if(universeToMenuScaleFactor < menuBackgroundScaleFactor) {
-      universeToMenuScaleFactor += 0.05;
+      universeToMenuScaleFactor += 0.1;
     }
     scale(universeToMenuScaleFactor);
     image(universe, 0, 0);
