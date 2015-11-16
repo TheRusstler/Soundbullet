@@ -16,6 +16,7 @@ enum GameState {
 }
 
 void draw() {
+  background(universe);
   switch(state)
   {
     case Menu:

@@ -31,13 +31,23 @@ class Menu {
   }
   
   void drawButton(Rectangle rect, String label) {
-    noFill();
+    if(isHover(rect)) {
+       fill(102, 0, 204, 100);
+    }
+    else {
+        fill(102, 0, 204, 40);
+    }
+
     stroke(102, 0, 204);
-    strokeWeight(2);
+    strokeWeight(4);
     rect((float)rect.getX(), (float)rect.getY(), (float)rect.getWidth(), (float)rect.getHeight());
     
     fill(255);
     text(label, (float)rect.getCenterX()-2, (float)rect.getCenterY()-2);
+  }
+  
+  boolean isHover(Rectangle rect) {
+    return rect.contains(mouseX, mouseY);
   }
   
   void clicked() {
