@@ -1,87 +1,35 @@
 PImage universe;
+GameState state;
+Menu menu;
 
 void setup() {
+  fullScreen();
   universe = loadImage("universe.jpg");
   universe.resize(width, height);
-  
-  fullScreen(P3D);
-  image(universe, 0, 0);
+  state = GameState.Menu;
+  background(universe);
+  menu = new Menu();
 }
 
 enum GameState {
-  Menu,
-  MenuToUniverseTransition,
-  UniverseToMenuTransition
+  Menu
 }
-
-GameState state = GameState.Menu;
 
 void draw() {
   switch(state)
   {
     case Menu:
-      menu();
-      break;
-    case MenuToUniverseTransition:
-      menuToUniverseTransition();
-      break;
-    case UniverseToMenuTransition:
-      universeToMenuTransition();
+      menu.paint();
       break;
   }
-  menuButtons();
-}
-
-
-void menu() {
-  menuBackground();
-  menuButtons();
-}
-
-void menuButtons() {
-  noFill();
-  stroke(255);
-  rectMode(CENTER);
-  rect(width/2, height/2, 50, 100);
-}
-
-float menuBackgroundScaleFactor = 2.5;
-void menuBackground() {
-  scale(menuBackgroundScaleFactor);
-  image(universe, 0, 0);
 }
 
 void mouseClicked() {
-  
   switch(state)
   {
     case Menu:
-    case UniverseToMenuTransition:
-      menuToUniverseScaleFactor = menuBackgroundScaleFactor;
-      state = GameState.MenuToUniverseTransition;
-      break;
-    case MenuToUniverseTransition:
-      universeToMenuScaleFactor = menuToUniverseScaleFactor;
-      state = GameState.UniverseToMenuTransition;
+      menu.clicked();
       break;
   }
-}
-
-float menuToUniverseScaleFactor;
-void menuToUniverseTransition() {
-    if(menuToUniverseScaleFactor > 1.05) {
-      menuToUniverseScaleFactor -= 0.1;
-    }
-    scale(menuToUniverseScaleFactor);
-    image(universe, 0, 0);
-}
-
-float universeToMenuScaleFactor;
-void universeToMenuTransition() {
-    if(universeToMenuScaleFactor < menuBackgroundScaleFactor) {
-      universeToMenuScaleFactor += 0.1;
-    }
-    scale(universeToMenuScaleFactor);
-    image(universe, 0, 0);
 }
   
