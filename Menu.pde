@@ -5,22 +5,29 @@ class Menu {
   Rectangle newGame, loadGame, quit;
   
   public Menu() {
-    newGame =   new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -100, buttonWidth, buttonHeight);
-    loadGame =  new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -0, buttonWidth, buttonHeight);
-    quit =      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +100, buttonWidth, buttonHeight);
+    newGame =   new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -50, buttonWidth, buttonHeight);
+    loadGame =  new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight);
+    quit =      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +150, buttonWidth, buttonHeight);
   }
   
   void paint() {
+    logo();
     menuButtons();
+  }
+  
+  void logo() {
+    textSize(70);
+    textAlign(CENTER, CENTER);
+    text("Soundbullet", width/2, 250);
   }
   
   void menuButtons() {
     textSize(22);
     textAlign(CENTER, CENTER);
     
-    drawButton(newGame, "New Game");
-    drawButton(loadGame, "Load Game");
-    drawButton(quit, "Quit");
+    drawButton(newGame,   "New Game");
+    drawButton(loadGame,  "Load Game");
+    drawButton(quit,      "Quit");
   }
   
   void drawButton(Rectangle rect, String label) {
