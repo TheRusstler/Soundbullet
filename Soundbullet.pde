@@ -29,11 +29,20 @@ void draw() {
       universeToMenuTransition();
       break;
   }
+  menuButtons();
 }
 
 
 void menu() {
-    menuBackground();
+  menuBackground();
+  menuButtons();
+}
+
+void menuButtons() {
+  noFill();
+  stroke(255);
+  rectMode(CENTER);
+  rect(width/2, height/2, 50, 100);
 }
 
 float menuBackgroundScaleFactor = 2.5;
