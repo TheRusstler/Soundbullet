@@ -1,7 +1,7 @@
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Menu implements Scene {
+public class Menu extends Scene {
 
   ArrayList<Button> buttons = new ArrayList<Button>();
 
@@ -37,17 +37,11 @@ public class Menu implements Scene {
   }
 
   void paint() {
-    logo();
+    menuLogo();
 
     for (Button b : buttons) {
       b.paint();
     }
-  }
-
-  void logo() {
-    textSize(70);
-    textAlign(CENTER, CENTER);
-    text("Soundbullet", width/2, 250);
   }
 
   void onClick() {

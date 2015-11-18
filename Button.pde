@@ -1,4 +1,4 @@
-class Button implements Scene {
+class Button extends Scene {
 
   private Rectangle rect;
   private String title;

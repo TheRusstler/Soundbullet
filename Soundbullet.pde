@@ -25,3 +25,13 @@ void draw() {
 void mouseClicked() {
   scene.onClick();
 }
+
+void keyPressed(KeyEvent event) {
+  scene.onKeyPressed(event);
+}
+
+void menuLogo() {
+  textSize(70);
+  textAlign(CENTER, CENTER);
+  text("Soundbullet", width/2, height/2 - 200);
+}

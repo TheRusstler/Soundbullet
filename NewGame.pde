@@ -1,10 +1,15 @@
-class NewGame implements Scene {
+class NewGame extends Scene {
 
   String name = "";
   Button start, back;
 
+  Rectangle textBoxBorder;
+
+  int buttonWidth = 140, buttonHeight = 60, textBoxWidth = 300;
+
   public NewGame() {
-    int buttonWidth = 140, buttonHeight = 60;
+    textBoxBorder = new Rectangle(width/2 - textBoxWidth/2, height/2 -buttonHeight/2 +20, textBoxWidth, buttonHeight);
+
     start = new Button("GO!", 
       new Rectangle(width/2 + 10, height/2 -buttonHeight/2 +200, buttonWidth, buttonHeight), 
       new Runnable() { 
@@ -24,10 +29,11 @@ class NewGame implements Scene {
   }
 
   void paint() {
-    logo();
+    menuLogo();
     start.paint();
     back.paint();
     textbox();
+    textboxLabel();
   }
 
   void onClick() {
@@ -35,12 +41,43 @@ class NewGame implements Scene {
     back.onClick();
   }
 
-  void logo() {
-    textSize(70);
+  void textbox() {
+    if (textBoxBorder.contains(mouseX, mouseY)) {
+      fill(255, 60);
+    } else {
+      fill(255, 40);
+    }
+
+    stroke(255);
+    strokeWeight(3);
+    rect((float)textBoxBorder.getX(), (float)textBoxBorder.getY(), (float)textBoxBorder.getWidth(), (float)textBoxBorder.getHeight());
+
+    fill(255);
+    textSize(22);
     textAlign(CENTER, CENTER);
-    text("Soundbullet", width/2, 250);
+    text(name, (float)textBoxBorder.getCenterX()-2, (float)textBoxBorder.getCenterY()-2);
   }
-  
+
+  void textboxLabel() {
+    textSize(20);
+    textAlign(LEFT, CENTER);
+    text("PLAYER NAME", width/2 - textBoxWidth/2, height/2 - 40);
+  }
+
+  void onKeyPressed(KeyEvent event) {
+    char ch = event.getKey();
+    if (Character.isLetter(ch) || Character.isDigit(ch) || ch == ' ') {
+      if(name.length() < 18)
+      name += Character.toUpperCase(ch);
+    }
+    else if(ch == BACKSPACE && name.length() > 0) {
+      name = name.substring(0, name.length()-1);
+    }
+    else if(ch == ENTER) {
+      submit();
+    }
+  }
+
   void submit() {
     exit();
   }
