@@ -1,11 +1,13 @@
 class Button implements Scene {
-  
+
   private Rectangle rect;
   private String title;
-
-  public Button(String title, Rectangle dimensions) {
+  private Runnable onClicked;
+  
+  public Button(String title, Rectangle dimensions, Runnable onClicked) {
     this.rect = dimensions;
     this.title = title;
+    this.onClicked = onClicked;
   }
 
   void paint() {
@@ -26,8 +28,10 @@ class Button implements Scene {
   }
 
   void onClick() {
-    if(rect.contains(mouseX, mouseY)) {
-      exit();
+    if (rect.contains(mouseX, mouseY)) {
+      if (onClicked != null) {
+        onClicked.run();
+      }
     }
   }
 }
