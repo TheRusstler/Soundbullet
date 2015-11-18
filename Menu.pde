@@ -1,18 +1,24 @@
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
-class Menu {
-  final int buttonWidth = 300, buttonHeight = 60;
-  Rectangle newGame, loadGame, quit;
+public class Menu implements Scene {
+
+  ArrayList<Button> buttons = new ArrayList<Button>();
   
   public Menu() {
-    newGame =   new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -50, buttonWidth, buttonHeight);
-    loadGame =  new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight);
-    quit =      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +150, buttonWidth, buttonHeight);
+    int buttonWidth = 300, buttonHeight = 60;
+    
+    buttons.add(new Button("New Game", new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -50, buttonWidth, buttonHeight)));
+    buttons.add(new Button("Load Game", new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight)));
+    buttons.add(new Button("Quit", new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +150, buttonWidth, buttonHeight)));
   }
   
   void paint() {
     logo();
-    menuButtons();
+    
+    for(Button b : buttons) {
+      b.paint();
+    }
   }
   
   void logo() {
@@ -21,38 +27,9 @@ class Menu {
     text("Soundbullet", width/2, 250);
   }
   
-  void menuButtons() {
-    textSize(22);
-    textAlign(CENTER, CENTER);
-    
-    drawButton(newGame,   "New Game");
-    drawButton(loadGame,  "Load Game");
-    drawButton(quit,      "Quit");
-  }
-  
-  void drawButton(Rectangle rect, String label) {
-    if(isHover(rect)) {
-       fill(102, 0, 204, 100);
-    }
-    else {
-        fill(102, 0, 204, 40);
-    }
-
-    stroke(102, 0, 204);
-    strokeWeight(4);
-    rect((float)rect.getX(), (float)rect.getY(), (float)rect.getWidth(), (float)rect.getHeight());
-    
-    fill(255);
-    text(label, (float)rect.getCenterX()-2, (float)rect.getCenterY()-2);
-  }
-  
-  boolean isHover(Rectangle rect) {
-    return rect.contains(mouseX, mouseY);
-  }
-  
-  void clicked() {
-    if(newGame.contains(mouseX, mouseY)) {
-      
+  void onClick() {
+    for(Button b : buttons) {
+      b.onClick();
     }
   }
 }

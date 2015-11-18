@@ -1,6 +1,6 @@
 PImage universe;
 GameState state;
-Menu menu;
+Scene scene;
 
 void setup() {
   fullScreen();
@@ -8,7 +8,9 @@ void setup() {
   universe.resize(width, height);
   state = GameState.Menu;
   background(universe);
-  menu = new Menu();
+  
+  // Menu is the start scene.
+  scene = new Menu();
 }
 
 enum GameState {
@@ -17,20 +19,9 @@ enum GameState {
 
 void draw() {
   background(universe);
-  switch(state)
-  {
-    case Menu:
-      menu.paint();
-      break;
-  }
+  scene.paint();
 }
 
 void mouseClicked() {
-  switch(state)
-  {
-    case Menu:
-      menu.clicked();
-      break;
-  }
+  scene.onClick();
 }
-  
