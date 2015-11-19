@@ -61,7 +61,7 @@ class NewGame extends Scene {
   void textboxLabel() {
     textSize(20);
     textAlign(LEFT, CENTER);
-    text("PLAYER NAME", width/2 - textBoxWidth/2, height/2 +10);
+    text("WHAT'S YOUR NAME, CAPTAIN?", width/2 - textBoxWidth/2, height/2 +10);
   }
 
   void onKeyPressed(KeyEvent event) {

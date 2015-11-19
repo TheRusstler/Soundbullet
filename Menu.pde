@@ -8,7 +8,7 @@ public class Menu extends Scene {
   public Menu() {
     int buttonWidth = 300, buttonHeight = 60;
 
-    buttons.add(new Button("NEW GAME", 
+    buttons.add(new Button("NEW CAMPAIGN", 
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
@@ -17,7 +17,7 @@ public class Menu extends Scene {
     }
     ));
 
-    buttons.add(new Button("LOAD GAME", 
+    buttons.add(new Button("LOAD", 
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +130, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {

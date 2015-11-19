@@ -8,7 +8,7 @@ void setup() {
   logoLarge = loadImage("logo/logo_large_transparent.png");
   logoSmall = loadImage("logo/logo_small_transparent.png");
   
-  float scale = 0.7;
+  float scale = 0.4;
   logoSmall.resize((int)(logoSmall.width * scale), (int)(logoSmall.height * scale));
   
   universe.resize(width, height);
@@ -42,7 +42,7 @@ void setScene(Scene scene) {
 }
 
 void menuLogo() {
-  image(logoLarge, width/2 - logoLarge.width/2, 0);
+  image(logoLarge, 0, 0);
 }
 
 void gameLogo() {
