@@ -9,16 +9,16 @@ public class Menu extends Scene {
     int buttonWidth = 300, buttonHeight = 60;
 
     buttons.add(new Button("NEW GAME", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 -80, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        scene = new NewGame();
+        setScene(new NewGame());
       }
     }
     ));
 
     buttons.add(new Button("LOAD GAME", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +20, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +130, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
         exit();
@@ -27,7 +27,7 @@ public class Menu extends Scene {
     ));
 
     buttons.add(new Button("QUIT", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +120, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +210, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
         exit();

@@ -8,7 +8,7 @@ class NewGame extends Scene {
   int buttonWidth = 140, buttonHeight = 60, textBoxWidth = 300;
 
   public NewGame() {
-    textBoxBorder = new Rectangle(width/2 - textBoxWidth/2, height/2 -buttonHeight/2 +20, textBoxWidth, buttonHeight);
+    textBoxBorder = new Rectangle(width/2 - textBoxWidth/2, height/2 -buttonHeight/2 +70, textBoxWidth, buttonHeight);
 
     start = new Button("GO!", 
       new Rectangle(width/2 + 10, height/2 -buttonHeight/2 +200, buttonWidth, buttonHeight), 
@@ -61,24 +61,22 @@ class NewGame extends Scene {
   void textboxLabel() {
     textSize(20);
     textAlign(LEFT, CENTER);
-    text("PLAYER NAME", width/2 - textBoxWidth/2, height/2 - 40);
+    text("PLAYER NAME", width/2 - textBoxWidth/2, height/2 +10);
   }
 
   void onKeyPressed(KeyEvent event) {
     char ch = event.getKey();
     if (Character.isLetter(ch) || Character.isDigit(ch) || ch == ' ') {
-      if(name.length() < 18)
-      name += Character.toUpperCase(ch);
-    }
-    else if(ch == BACKSPACE && name.length() > 0) {
+      if (name.length() < 18)
+        name += Character.toUpperCase(ch);
+    } else if (ch == BACKSPACE && name.length() > 0) {
       name = name.substring(0, name.length()-1);
-    }
-    else if(ch == ENTER) {
+    } else if (ch == ENTER) {
       submit();
     }
   }
 
   void submit() {
-    exit();
+    setScene(new Universe(this.name));
   }
 }
