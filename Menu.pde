@@ -12,7 +12,7 @@ public class Menu extends Scene {
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        setScene(new NewGame());
+        setScene(new NewGame(), false);
       }
     }
     ));

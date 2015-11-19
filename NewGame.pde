@@ -22,7 +22,7 @@ class NewGame extends Scene {
       new Rectangle(width/2 - buttonWidth - 10, height/2 -buttonHeight/2 +200, buttonWidth, buttonHeight), 
       new Runnable() { 
       void run() {
-        scene = new Menu();
+        setScene(new Menu(), false);
       }
     }
     );
@@ -77,6 +77,6 @@ class NewGame extends Scene {
   }
 
   void submit() {
-    setScene(new Universe(this.name));
+    setScene(new Universe(this.name), true);
   }
 }
