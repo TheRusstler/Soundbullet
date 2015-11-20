@@ -2,19 +2,27 @@ PImage universe, logoLarge, logoSmall;
 private Scene scene;
 ArrayList<Star> stars = new ArrayList<Star>();
 
+PImage planetType1, planetType2;
+
 void setup() {
   fullScreen();
+  
+  imageMode(CENTER);
+      
   universe = loadImage("universe.jpg");
   logoLarge = loadImage("logo/logo_large_transparent.png");
   logoSmall = loadImage("logo/logo_small_transparent.png");
 
-  float scale = 0.4;
+  planetType1 = loadImage("planets/red.png");
+  planetType2 = loadImage("planets/green-planet.png");
+
+  float scale = 0.6;
   logoSmall.resize((int)(logoSmall.width * scale), (int)(logoSmall.height * scale));
 
   universe.resize(width, height);
 
   // Menu is the start scene.
-  setScene(new Menu(), true);
+  setScene(new Universe("Test"), true);
 }
 
 void draw() {
@@ -53,9 +61,9 @@ void setScene(Scene scene, boolean refreshStars) {
 }
 
 void menuLogo() {
-  image(logoLarge, 0, 0);
+  image(logoLarge, logoLarge.width/2, logoLarge.height/2);
 }
 
 void gameLogo() {
-  image(logoSmall, 0, 0);
+  image(logoSmall, logoSmall.width/2, logoSmall.height/2);
 }
