@@ -8,16 +8,17 @@ class Universe extends Scene {
     this.playerName = playerName;
 
     int buttonWidth = 300, buttonHeight = 60;
-    visibleTree.add(new Button("Planet mode", 
+    visibleTree.add(new Button("Regenerate Planets", 
       new Rectangle(width/2 - buttonWidth/2, height -buttonHeight/2 - 50, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        setScene(new Menu(), true);
+        setScene(new Universe("Test"), true);
       }
     }
     ));
     
     planets.add(new Planet(250,250));
+    planets.add(new Planet(850,210));
     planets.add(new Planet(600,350));
     planets.add(new Planet(270,600));
   }
