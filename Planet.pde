@@ -19,7 +19,8 @@ class Planet extends Scene {
       type = planetType2.copy();
     }
 
-    diameter = (int)random(100, 250);
+//diameter = (int)random(200, 200);
+    diameter = (int)random(100, 200);
     bounds = new Ellipse2D.Double(x - diameter/2, y-diameter/2, diameter, diameter);
 
     type.resize(diameter, diameter);

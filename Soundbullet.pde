@@ -22,8 +22,8 @@ void setup() {
   universe.resize(width, height);
 
   // Menu is the start scene.
-  //setScene(new Menu(), true);
-  setScene(new Universe("Test"), true);
+  setScene(new Menu(), true);
+  //setScene(new Universe("Test"), true);
 }
 
 void draw() {

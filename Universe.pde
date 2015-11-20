@@ -16,11 +16,18 @@ class Universe extends Scene {
       }
     }
     ));
+
+    planets.add(new Planet(200, 250));
+    planets.add(new Planet(300, 490));
+    planets.add(new Planet(210, 670));
     
-    planets.add(new Planet(250,250));
-    planets.add(new Planet(850,210));
-    planets.add(new Planet(600,350));
-    planets.add(new Planet(270,600));
+    planets.add(new Planet(850, 210));
+    planets.add(new Planet(900, 430));
+    
+    planets.add(new Planet(820, 630));
+    
+    planets.add(new Planet(600, 350));
+    planets.add(new Planet(560, 610));
   }
 
   void paint() {
@@ -29,7 +36,7 @@ class Universe extends Scene {
     for (Scene element : visibleTree) {
       element.paint();
     }
-    
+
     for (Planet planet : planets) {
       planet.paint();
     }
