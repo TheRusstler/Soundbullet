@@ -69,6 +69,11 @@ class Planet extends Scene {
       mouseY + PLANET_WINDOW_PADDING, 
       PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2,
       PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING * 2);
+      
+      textAlign(CENTER, CENTER);
+      text("Click to travel!", 
+        mouseX + (PLANET_WINDOW_WIDTH + PLANET_WINDOW_PADDING)/2, 
+        mouseY + PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING - 5);
   }
 
   public void onClick() {
