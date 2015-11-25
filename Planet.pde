@@ -1,5 +1,3 @@
-import java.awt.geom.*;
-
 class Planet extends Scene {
 
   PImage type;
@@ -7,11 +5,12 @@ class Planet extends Scene {
   PVector position;
   int diameter;
   int r, g, b;
-  String name, song, description;
+  SoundFile song;
+  String name, description;
 
   Ellipse2D bounds;
 
-  public Planet(int x, int y, String name, String song, String description) {
+  public Planet(int x, int y, String name, SoundFile song, String description) {
     this.position =  new PVector(x, y);
     this.name = name;
     this.song = song;
@@ -65,7 +64,7 @@ class Planet extends Scene {
     textSize(12);
     textAlign(LEFT, TOP);
     fill(255);
-    text(name, 
+    text(name + "\n\n" + description, 
       mouseX + PLANET_WINDOW_PADDING,
       mouseY + PLANET_WINDOW_PADDING, 
       PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2,

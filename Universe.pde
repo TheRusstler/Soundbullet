@@ -17,19 +17,16 @@ class Universe extends Scene {
 
     // TODO: Be more creative :3
     addPlanet(new Planet(200, 250, "Breathing Underwater", 
-                                      "Hollywood Principle - Breathing Underwater (Ether Remix).mp3", 
+                                      music.get(0), 
                                       "A cold place"));
                                       
-    addPlanet(new Planet(300, 490, "Gaspra", "default.mp3", "A dangerous planet"));
-    addPlanet(new Planet(210, 670, "Ida", "default", "Just before sunrise, the sky turns a warm shade of violet here"));
-
-    addPlanet(new Planet(850, 210, "Dactyl", "default.mp3", "Rumour has it, infant Zeus was hidden and raised here"));
-    addPlanet(new Planet(900, 430, "Callisto", "default.mp3", "Once described as \"The most unintresting planet ever visited\""));
-
-    addPlanet(new Planet(820, 630, "Elara", "default.mp3", ""));
-
-    addPlanet(new Planet(600, 350, "Leda", "default.mp3", ""));
-    addPlanet(new Planet(560, 610, "Mneme", "default.mp3", ""));
+    addPlanet(new Planet(300, 490, "Gaspra", music.get(0), "A dangerous planet"));
+    addPlanet(new Planet(210, 670, "Ida", music.get(0),"Just before sunrise, the sky turns a warm shade of violet here"));
+    addPlanet(new Planet(850, 210, "Dactyl", music.get(0), "Rumour has it, infant Zeus was hidden and raised here"));
+    addPlanet(new Planet(900, 430, "Callisto", music.get(0), "Once described as \"The most unintresting planet ever visited\""));
+    addPlanet(new Planet(820, 630, "Elara", music.get(0), ""));
+    addPlanet(new Planet(600, 350, "Leda", music.get(0), ""));
+    addPlanet(new Planet(560, 610, "Mneme", music.get(0), ""));
   }
   
   void addPlanet(Planet planet) {

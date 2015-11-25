@@ -1,4 +1,3 @@
-
 class PlanetMode extends Scene {
   
   private Planet planet;
@@ -17,6 +16,7 @@ class PlanetMode extends Scene {
   }
   
   void onClick() {
-  
+    planet.song.play();
+    //setScene(new Universe(),false);
   }
 }

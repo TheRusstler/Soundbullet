@@ -1,6 +1,3 @@
-import java.awt.Rectangle;
-import java.util.ArrayList;
-
 public class Menu extends Scene {
 
   ArrayList<Button> buttons = new ArrayList<Button>();
