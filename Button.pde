@@ -26,7 +26,7 @@ class Button extends Scene {
     }
 
     stroke(102, 0, 204);
-    strokeWeight(3);
+    strokeWeight(2);
     rect((float)rect.getX(), (float)rect.getY(), (float)rect.getWidth(), (float)rect.getHeight());
 
     fill(255);

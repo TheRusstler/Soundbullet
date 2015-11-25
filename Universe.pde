@@ -53,7 +53,7 @@ class Universe extends Scene {
     }
   }
 
-  final int HUD_WIDTH = 300, HUD_HEIGHT = 600, HUD_PADDING = 15;
+  final int HUD_WIDTH = 300, HUD_HEIGHT = 400, HUD_PADDING = 15;
   void drawHUD() {
     int hudX, hudY;
     hudX = width-HUD_WIDTH + 5;

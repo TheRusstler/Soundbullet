@@ -11,7 +11,7 @@ class NewGame extends Scene {
     textBoxBorder = new Rectangle(width/2 - textBoxWidth/2, height/2 -buttonHeight/2 +70, textBoxWidth, buttonHeight);
 
     start = new Button("GO!", 
-      new Rectangle(width/2 + 10, height/2 -buttonHeight/2 +200, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 + 10, height/2 -buttonHeight/2 +210, buttonWidth, buttonHeight), 
       new Runnable() { 
       void run() {
         submit();
@@ -19,7 +19,7 @@ class NewGame extends Scene {
     }
     );
     back = new Button("BACK", 
-      new Rectangle(width/2 - buttonWidth - 10, height/2 -buttonHeight/2 +200, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 - buttonWidth - 10, height/2 -buttonHeight/2 +210, buttonWidth, buttonHeight), 
       new Runnable() { 
       void run() {
         setScene(new Menu(), false);
@@ -49,7 +49,7 @@ class NewGame extends Scene {
     }
 
     stroke(255);
-    strokeWeight(3);
+    strokeWeight(2);
     rect((float)textBoxBorder.getX(), (float)textBoxBorder.getY(), (float)textBoxBorder.getWidth(), (float)textBoxBorder.getHeight());
 
     fill(255);
@@ -78,7 +78,9 @@ class NewGame extends Scene {
   }
 
   void submit() {
-    game = new Game(this.name);
-    setScene(new Universe(), true);
+    if (name != null && !name.isEmpty()) {
+      game = new Game(this.name);
+      setScene(new Universe(), true);
+    }
   }
 }
