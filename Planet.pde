@@ -7,11 +7,15 @@ class Planet extends Scene {
   PVector position;
   int diameter;
   int r, g, b;
+  String name, song, description;
 
   Ellipse2D bounds;
 
-  public Planet(int x, int y) {
+  public Planet(int x, int y, String name, String song, String description) {
     this.position =  new PVector(x, y);
+    this.name = name;
+    this.song = song;
+    this.description = description;
 
     if (random(0, 1) > 0.5) {
       type = planetType1.copy();
@@ -19,7 +23,6 @@ class Planet extends Scene {
       type = planetType2.copy();
     }
 
-//diameter = (int)random(200, 200);
     diameter = (int)random(100, 200);
     bounds = new Ellipse2D.Double(x - diameter/2, y-diameter/2, diameter, diameter);
 
@@ -40,8 +43,9 @@ class Planet extends Scene {
     image(type, 0, 0);
     
     noStroke();
-    fill(255,30);
+
     if (bounds.contains(mouseX, mouseY)) {
+      fill(255,30);
       ellipse(0, 0, diameter*0.85, diameter*0.85);
     }
 
@@ -49,7 +53,28 @@ class Planet extends Scene {
     translate(-position.x, -position.y);
     noTint();
   }
+  
+  final int PLANET_WINDOW_WIDTH = 200, PLANET_WINDOW_HEIGHT = 150, PLANET_WINDOW_PADDING = 15;
+  
+  private void mouseOverWindow() {
+    stroke(0, 53, 204);
+    strokeWeight(2);
+    fill(0, 20, 77, 150);
+    rect(mouseX, mouseY, PLANET_WINDOW_WIDTH, PLANET_WINDOW_HEIGHT, 5);
+    
+    textSize(12);
+    textAlign(LEFT, TOP);
+    fill(255);
+    text(name, 
+      mouseX + PLANET_WINDOW_PADDING,
+      mouseY + PLANET_WINDOW_PADDING, 
+      PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2,
+      PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING * 2);
+  }
 
   public void onClick() {
+    if (bounds.contains(mouseX, mouseY)) {
+      setScene(new PlanetMode(this), false);
+    } 
   }
 }

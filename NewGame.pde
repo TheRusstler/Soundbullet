@@ -61,6 +61,7 @@ class NewGame extends Scene {
   void textboxLabel() {
     textSize(20);
     textAlign(LEFT, CENTER);
+    fill(255);
     text("WHAT'S YOUR NAME, CAPTAIN?", width/2 - textBoxWidth/2, height/2 +10);
   }
 
@@ -77,6 +78,7 @@ class NewGame extends Scene {
   }
 
   void submit() {
-    setScene(new Universe(this.name), true);
+    game = new Game(this.name);
+    setScene(new Universe(), true);
   }
 }
