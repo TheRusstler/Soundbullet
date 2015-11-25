@@ -3,11 +3,19 @@ class Button extends Scene {
   private Rectangle rect;
   private String title;
   private Runnable onClicked;
+  private int fontSize = 22;
   
   public Button(String title, Rectangle dimensions, Runnable onClicked) {
     this.rect = dimensions;
     this.title = title;
     this.onClicked = onClicked;
+  }
+  
+  public Button(String title, Rectangle dimensions, Runnable onClicked, int fontSize) {
+    this.rect = dimensions;
+    this.title = title;
+    this.onClicked = onClicked;
+    this.fontSize = fontSize;
   }
 
   void paint() {
@@ -22,7 +30,7 @@ class Button extends Scene {
     rect((float)rect.getX(), (float)rect.getY(), (float)rect.getWidth(), (float)rect.getHeight());
 
     fill(255);
-    textSize(22);
+    textSize(fontSize);
     textAlign(CENTER, CENTER);
     text(title, (float)rect.getCenterX()-2, (float)rect.getCenterY()-2);
   }

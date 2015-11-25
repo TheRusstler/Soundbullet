@@ -7,6 +7,7 @@ import processing.sound.*;
 ArrayList<Star> stars = new ArrayList<Star>();
 PImage logoLarge, planetType1, planetType2;
 ArrayList<SoundFile> music = new ArrayList<SoundFile>();
+final String SAVE_FILE = "data/save.json";
 
 // Current scene
 Scene scene;
@@ -16,13 +17,13 @@ Game game = null;
 
 void setup() {
   fullScreen();
-  
+
   imageMode(CENTER);
-      
+
   logoLarge = loadImage("resources/logo/logo_large_transparent.png");
   planetType1 = loadImage("resources/planets/red.png");
   planetType2 = loadImage("resources/planets/green-planet.png");
-  
+
   music.add(new SoundFile(this, "music/breathing_underwater.mp3"));
 
   // Menu is the start scene.

@@ -5,6 +5,8 @@ public class Menu extends Scene {
   public Menu() {
     int buttonWidth = 300, buttonHeight = 60;
 
+    game = loadGame();
+
     buttons.add(new Button("NEW CAMPAIGN", 
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +50, buttonWidth, buttonHeight), 
       new Runnable() {
@@ -18,7 +20,9 @@ public class Menu extends Scene {
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +130, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        exit();
+        if(game != null) {
+          setScene(new Universe(), true);
+        }
       }
     }
     ));
@@ -31,6 +35,20 @@ public class Menu extends Scene {
       }
     }
     ));
+  }
+
+  public Game loadGame() { 
+    Game result = null;
+
+    File path = new File(dataPath("save.json"));
+    if (path.exists()) {
+      JSONObject json = loadJSONObject(dataPath("save.json"));
+      result = new Game(
+        json.getString("player"), 
+        json.getInt("health"));
+    }
+
+    return result;
   }
 
   void paint() {

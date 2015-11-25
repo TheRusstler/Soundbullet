@@ -5,30 +5,30 @@ class Universe extends Scene {
   ArrayList<Planet> planets = new ArrayList<Planet>();
 
   public Universe() {
-    int buttonWidth = 300, buttonHeight = 60;
-    visibleTree.add(new Button("Regenerate Planets", 
-      new Rectangle(width/2 - buttonWidth/2, height -buttonHeight/2 - 50, buttonWidth, buttonHeight), 
+    int buttonWidth = 100, buttonHeight = 40;
+    visibleTree.add(new Button("Menu", 
+      new Rectangle(5, 5, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        setScene(new Universe(), false);
-      }
-    }
-    ));
+        saveAndExit();
+      }},
+      14
+     ));
 
     // TODO: Be more creative :3
     addPlanet(new Planet(200, 250, "Breathing Underwater", 
-                                      music.get(0), 
-                                      "A cold place"));
-                                      
+      music.get(0), 
+      "A cold place"));
+
     addPlanet(new Planet(300, 490, "Gaspra", music.get(0), "A dangerous planet"));
-    addPlanet(new Planet(210, 670, "Ida", music.get(0),"Just before sunrise, the sky turns a warm shade of violet here"));
+    addPlanet(new Planet(210, 670, "Ida", music.get(0), "Just before sunrise, the sky turns a warm shade of violet here"));
     addPlanet(new Planet(850, 210, "Dactyl", music.get(0), "Rumour has it, infant Zeus was hidden and raised here"));
     addPlanet(new Planet(900, 430, "Callisto", music.get(0), "Once described as \"The most unintresting planet ever visited\""));
     addPlanet(new Planet(820, 630, "Elara", music.get(0), ""));
     addPlanet(new Planet(600, 350, "Leda", music.get(0), ""));
     addPlanet(new Planet(560, 610, "Mneme", music.get(0), ""));
   }
-  
+
   void addPlanet(Planet planet) {
     planets.add(planet);
     visibleTree.add(planet);
@@ -44,6 +44,8 @@ class Universe extends Scene {
       planet.paint();
     }
 
+    drawHUD();
+
     for (Planet planet : planets) {
       if (planet.bounds.contains(mouseX, mouseY)) {
         planet.mouseOverWindow();
@@ -51,9 +53,37 @@ class Universe extends Scene {
     }
   }
 
+  final int HUD_WIDTH = 300, HUD_HEIGHT = 600, HUD_PADDING = 15;
+  void drawHUD() {
+    int hudX, hudY;
+    hudX = width-HUD_WIDTH + 5;
+    hudY = height/2 - HUD_HEIGHT/2;
+
+    stroke(102, 0, 204);
+    strokeWeight(2);
+    fill(102, 0, 204, 40);
+    rect(hudX, hudY, HUD_WIDTH, HUD_HEIGHT, 0);
+
+    textSize(16);
+    textAlign(LEFT, TOP);
+    fill(255);
+    text(String.format("CAPTAIN %s,", game.getPlayerName()), hudX + HUD_PADDING, hudY + HUD_PADDING);
+   
+    textSize(14);
+    text("Here is the latest staus update:", hudX + HUD_PADDING, hudY + 50);
+    
+    textAlign(CENTER, TOP);
+    text("Ship health: " + game.getShipHealth() + "%" , hudX + HUD_WIDTH/2, hudY + 100);
+  }
+
   void onClick() {
     for (Scene element : visibleTree) {
       element.onClick();
     }
+  }
+  
+  void saveAndExit() {
+    game.save();
+    setScene(new Menu(), false);
   }
 }
