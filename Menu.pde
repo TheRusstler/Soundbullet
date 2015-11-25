@@ -45,7 +45,8 @@ public class Menu extends Scene {
       JSONObject json = loadJSONObject(dataPath("save.json"));
       result = new Game(
         json.getString("player"), 
-        json.getInt("health"));
+        json.getInt("health"),
+        json.getInt("points"));
     }
 
     return result;

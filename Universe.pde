@@ -74,6 +74,7 @@ class Universe extends Scene {
     
     textAlign(CENTER, TOP);
     text("Ship health: " + game.getShipHealth() + "%" , hudX + HUD_WIDTH/2, hudY + 100);
+    text("Points: " + game.getPoints(), hudX + HUD_WIDTH/2, hudY + 150);
   }
 
   void onClick() {
