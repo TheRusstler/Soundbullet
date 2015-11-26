@@ -80,7 +80,8 @@ class NewGame extends Scene {
   void submit() {
     if (name != null && !name.isEmpty()) {
       game = new Game(this.name);
-      setScene(new Universe(), true);
+      universe = new Universe();
+      setScene(universe, true);
     }
   }
 }

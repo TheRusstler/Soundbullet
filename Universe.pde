@@ -64,7 +64,6 @@ class Universe extends Scene {
     fill(102, 0, 204, 40);
     rect(hudX, hudY, HUD_WIDTH, HUD_HEIGHT, 0);
 
-
     textAlign(CENTER, TOP);
     textSize(20);
     fill(255);

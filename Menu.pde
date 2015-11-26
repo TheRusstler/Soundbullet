@@ -21,7 +21,8 @@ public class Menu extends Scene {
       new Runnable() {
       public void run() {
         if(game != null) {
-          setScene(new Universe(), true);
+          universe = new Universe();
+          setScene(universe, true);
         }
       }
     }

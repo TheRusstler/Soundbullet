@@ -34,6 +34,7 @@ class Planet extends Scene {
   }
 
   public void paint() {
+    imageMode(CENTER);
     tint(r, g, b);
 
     translate(position.x, position.y);
