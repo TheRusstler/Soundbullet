@@ -65,8 +65,8 @@ class NewGame extends Scene {
     text("WHAT'S YOUR NAME, CAPTAIN?", width/2 - textBoxWidth/2, height/2 +10);
   }
 
-  void onKeyPressed(KeyEvent event) {
-    char ch = event.getKey();
+  void onKeyPressed() {
+    char ch = key;
     if (Character.isLetter(ch) || Character.isDigit(ch) || ch == ' ') {
       if (name.length() < 11)
         name += Character.toUpperCase(ch);

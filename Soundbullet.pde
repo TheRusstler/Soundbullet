@@ -56,8 +56,12 @@ void mouseReleased() {
   scene.onClick();
 }
 
-void keyPressed(KeyEvent event) {
-  scene.onKeyPressed(event);
+void keyPressed() {
+  scene.onKeyPressed();
+}
+
+void keyReleased() {
+  scene.onKeyReleased();
 }
 
 // Navigation

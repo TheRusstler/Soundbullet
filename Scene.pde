@@ -2,5 +2,6 @@ abstract class Scene {
   abstract void paint();
   abstract void onClick();
   
-  void onKeyPressed(KeyEvent event) {}
+  void onKeyPressed() {}
+  void onKeyReleased() {}
 }

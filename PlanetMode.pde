@@ -1,9 +1,14 @@
 class PlanetMode extends Scene {
 
   private Planet planet;
-      
+  private Ship ship;
+
+  int offset1 = surface.height*-1 + height;
+  float tintRatio = 0.75;
+
   public PlanetMode(Planet planet) {
     this.planet = planet;
+    this.ship = new Ship();
     showStars = false;
   }
 
@@ -12,23 +17,21 @@ class PlanetMode extends Scene {
   }
 
   void paint() {
-    textSize(12);
-    textAlign(LEFT, TOP);
+    rectMode(CENTER);
 
     paintBackground();
+    ship.paint();
+
+    rectMode(CORNER);
   }
 
-  int offset1 = surface.height*-1 + height;
-  float tintRatio = 0.75;
   void paintBackground() {
     imageMode(CORNER);
 
     fill(0);
     rect(0, 0, width, height);
-
-
     tint(planet.r * tintRatio, planet.g * tintRatio, planet.b * tintRatio);
-    
+
     if (offset1 >= 0) {
       if (offset1 > height) {
         offset1 = surface.height*-1 + height;
@@ -46,6 +49,14 @@ class PlanetMode extends Scene {
   void onClick() {
     //planet.song.play();
     returnToUniverse();
+  }
+
+  void onKeyPressed() {
+    ship.onKeyPressed();
+  }
+
+  void onKeyReleased() {
+    ship.onKeyReleased();
   }
 
   void returnToUniverse() {
