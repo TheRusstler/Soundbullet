@@ -1,7 +1,7 @@
 class PlanetMode extends Scene {
 
   private Planet planet;
-
+      
   public PlanetMode(Planet planet) {
     this.planet = planet;
     showStars = false;
@@ -11,8 +11,6 @@ class PlanetMode extends Scene {
     showStars = true;
   }
 
-
-
   void paint() {
     textSize(12);
     textAlign(LEFT, TOP);
@@ -21,12 +19,16 @@ class PlanetMode extends Scene {
   }
 
   int offset1 = surface.height*-1 + height;
-
+  float tintRatio = 0.75;
   void paintBackground() {
     imageMode(CORNER);
 
+    fill(0);
     rect(0, 0, width, height);
 
+
+    tint(planet.r * tintRatio, planet.g * tintRatio, planet.b * tintRatio);
+    
     if (offset1 >= 0) {
       if (offset1 > height) {
         offset1 = surface.height*-1 + height;
@@ -34,8 +36,8 @@ class PlanetMode extends Scene {
         image(surface, width/2 - surface.width/2, offset1 - surface.height);
       }
     }
-    
-   image(surface, width/2 - surface.width/2, offset1);
+
+    image(surface, width/2 - surface.width/2, offset1);
 
     offset1 += 5;
   }
