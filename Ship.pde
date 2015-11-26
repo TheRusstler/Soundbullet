@@ -18,17 +18,18 @@ class Ship extends Scene {
   }
 
   void integrate() {
-    int margin = (width - surface.width)/2 + 30; // 30?
+    int margin = (width - surface.width)/2;
+    
     if (left && position.x > margin) {
       position.x = position.x - sensitivity;
     }
     if (right && position.x < (width - margin)) {
       position.x = position.x + sensitivity;
     }
-    if (up) {
+    if (up && position.y > 0) {
       position.y = position.y - sensitivity;
     }
-    if (down) {
+    if (down && position.y < height) {
       position.y = position.y + sensitivity;
     }
   }
