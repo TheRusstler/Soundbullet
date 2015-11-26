@@ -68,7 +68,7 @@ class NewGame extends Scene {
   void onKeyPressed(KeyEvent event) {
     char ch = event.getKey();
     if (Character.isLetter(ch) || Character.isDigit(ch) || ch == ' ') {
-      if (name.length() < 18)
+      if (name.length() < 11)
         name += Character.toUpperCase(ch);
     } else if (ch == BACKSPACE && name.length() > 0) {
       name = name.substring(0, name.length()-1);

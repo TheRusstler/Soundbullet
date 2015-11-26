@@ -24,6 +24,10 @@ class Game {
     return this.points;
   }
   
+  public int getOnlineRanking() {
+    return 1;
+  }
+  
   public void save() {
     JSONObject json = new JSONObject();
     json.setString("player", player);

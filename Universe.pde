@@ -16,9 +16,9 @@ class Universe extends Scene {
      ));
 
     // TODO: Be more creative :3
-    addPlanet(new Planet(200, 250, "Breathing Underwater", 
+    addPlanet(new Planet(200, 250, "Home", 
       music.get(0), 
-      "A cold place"));
+      "There's no place like it.\nTravel here for ship repairs and upgrades."));
 
     addPlanet(new Planet(300, 490, "Gaspra", music.get(0), "A dangerous planet"));
     addPlanet(new Planet(210, 670, "Ida", music.get(0), "Just before sunrise, the sky turns a warm shade of violet here"));
@@ -53,7 +53,7 @@ class Universe extends Scene {
     }
   }
 
-  final int HUD_WIDTH = 300, HUD_HEIGHT = 400, HUD_PADDING = 15;
+  final int HUD_WIDTH = 250, HUD_HEIGHT = 400, HUD_PADDING = 55;
   void drawHUD() {
     int hudX, hudY;
     hudX = width-HUD_WIDTH + 5;
@@ -64,17 +64,20 @@ class Universe extends Scene {
     fill(102, 0, 204, 40);
     rect(hudX, hudY, HUD_WIDTH, HUD_HEIGHT, 0);
 
-    textSize(16);
-    textAlign(LEFT, TOP);
-    fill(255);
-    text(String.format("CAPTAIN %s,", game.getPlayerName()), hudX + HUD_PADDING, hudY + HUD_PADDING);
-   
-    textSize(14);
-    text("Here is the latest staus update:", hudX + HUD_PADDING, hudY + 50);
-    
+
     textAlign(CENTER, TOP);
-    text("Ship health: " + game.getShipHealth() + "%" , hudX + HUD_WIDTH/2, hudY + 100);
-    text("Points: " + game.getPoints(), hudX + HUD_WIDTH/2, hudY + 150);
+    textSize(20);
+    fill(255);
+    text(String.format("CAPTAIN %s", game.getPlayerName()), hudX + HUD_WIDTH/2, hudY + 30);
+   
+    textSize(16);
+    text("STATUS REPORT:", hudX + HUD_WIDTH/2, hudY + 80);
+    
+    textSize(14);
+    text("Health: " + game.getShipHealth() + "%" , hudX + HUD_WIDTH/2, hudY + 110);
+    text("Points: " + game.getPoints(), hudX + HUD_WIDTH/2, hudY + 140);
+    text("Online ranking: #" + game.getOnlineRanking(), hudX + HUD_WIDTH/2, hudY + 170);
+    text("Empire size: " + game.getOnlineRanking(), hudX + HUD_WIDTH/2, hudY + 200);
   }
 
   void onClick() {
