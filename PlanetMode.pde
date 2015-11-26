@@ -10,6 +10,7 @@ class PlanetMode extends Scene {
     this.planet = planet;
     this.ship = new Ship();
     showStars = false;
+    noCursor();
   }
 
   public void exitPlanetMode() {
@@ -21,6 +22,7 @@ class PlanetMode extends Scene {
 
     paintBackground();
     ship.paint();
+
 
     rectMode(CORNER);
   }
@@ -62,5 +64,6 @@ class PlanetMode extends Scene {
   void returnToUniverse() {
     setScene(universe, false); 
     showStars = true;
+    cursor();
   }
 }
