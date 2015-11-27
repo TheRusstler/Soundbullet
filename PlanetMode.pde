@@ -24,7 +24,8 @@ class PlanetMode extends Scene {
     detectBulletPirateCollisions();
     
     if (pirates.size() < 1) {
-      pirates.add(new Pirate(false, new PVector(width/2, height/2)));
+      int surfaceX = width/2 - surface.width/2;
+      pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
     }
   }
 
@@ -62,7 +63,7 @@ class PlanetMode extends Scene {
     ship.paint();
 
     for (Pirate p : pirates) {
-      p.paint();
+      p.paint(new PVector((float)ship.bounds.getCenterX(), (float)ship.bounds.getCenterY()));
     }
 
     rectMode(CORNER);

@@ -35,6 +35,8 @@ class Planet extends Scene {
 
   public void paint() {
     imageMode(CENTER);
+    rectMode(CORNER);
+    
     tint(r, g, b);
 
     translate(position.x, position.y);
@@ -60,6 +62,7 @@ class Planet extends Scene {
     stroke(0, 53, 204);
     strokeWeight(2);
     fill(0, 20, 77, 150);
+    
     rect(mouseX, mouseY, PLANET_WINDOW_WIDTH, PLANET_WINDOW_HEIGHT, 5);
     
     textSize(12);

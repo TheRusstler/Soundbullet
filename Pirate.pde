@@ -8,9 +8,9 @@ class Pirate {
   // Captain is bigger and stronger
   boolean isCaptain;
 
-  public Pirate(boolean isCaptain, PVector position) {
+  public Pirate(boolean isCaptain, float xPosition) {
     this.isCaptain = isCaptain;
-    this.velocity = new PVector(1, 0);
+    this.velocity = new PVector(0, 1);
 
     sprite = pirate.copy();
 
@@ -20,11 +20,12 @@ class Pirate {
 
     float ratio = 0.6;
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
-    bounds = new Rectangle((int)position.x - sprite.width/2, (int)position.y-sprite.height - 20, sprite.width, sprite.height);
+    bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
   }
   
   void takeDamage() {
     
+    // Captains take less damage
     if (isCaptain) {
       health -= 1;
     }
@@ -38,17 +39,22 @@ class Pirate {
     return health <= 0;
   }
 
-  void integrate() {
+  // Use target to update velocity.
+  void integrate(PVector target) {
     bounds.x += velocity.x; 
     bounds.y -= velocity.y; 
+    
+    // Travel down to a certain y
+    if(bounds.y < 2 * sprite.height) {
+      velocity.y = -1;
+    }
+    else {
+      velocity.y = 0;
+    }
   }
 
-  void paint() {
-    integrate();
-
-    //rectMode(CORNER);
-    //fill(255, 255, 255, 50);
-    //rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
+  void paint(PVector target) {
+    integrate(target);
 
     imageMode(CORNER);
     image(sprite, bounds.x, bounds.y);
