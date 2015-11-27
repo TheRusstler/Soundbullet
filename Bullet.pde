@@ -7,11 +7,10 @@ class Bullet {
   public Bullet(PVector pos) {
     pos.x = pos.x - SIZE/2;
     this.bounds = new Rectangle((int)pos.x, (int)pos.y, SIZE, SIZE);
-    this.velocity = new PVector(0, 10);
+    this.velocity = new PVector(0, 15);
   }
 
   void integrate() {
-    bounds.x += velocity.x; 
     bounds.y -= velocity.y; 
   }
 
