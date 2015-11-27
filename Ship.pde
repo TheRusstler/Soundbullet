@@ -16,13 +16,13 @@ class Ship extends Scene {
     integrate();
     fill(200, 0, 0);
     
-    imageMode(CORNER);
-    image(sprite, bounds.x, bounds.y);
-    
+    // Debug to see ship bounds.
     rectMode(CORNER);
-    
     fill(255, 255, 255, 50);
     rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
+    
+    imageMode(CORNER);
+    image(sprite, bounds.x, bounds.y);
   }
 
   void onClick() {

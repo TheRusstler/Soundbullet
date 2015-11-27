@@ -4,7 +4,7 @@ class PlanetMode extends Scene {
   private Ship ship;
 
   int offset1 = surface.height*-1 + height;
-  float tintRatio = 0.75;
+  float tintRatio = 0.4;
 
   public PlanetMode(Planet planet) {
     this.planet = planet;
@@ -44,8 +44,8 @@ class PlanetMode extends Scene {
 
     image(surface, width/2 - surface.width/2, offset1);
 
-    offset1 += 5;
-    
+    offset1 += 4;
+   
     noTint();
   }
 

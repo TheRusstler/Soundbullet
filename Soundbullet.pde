@@ -28,8 +28,7 @@ void loadResources() {
   logoLarge   = loadImage("resources/logo/logo_large_transparent.png");
   planetType1 = loadImage("resources/planets/red.png");
   planetType2 = loadImage("resources/planets/green-planet.png");
-  surface     = loadImage("resources/planets/planetBackground.jpg");
-  surface     = loadImage("resources/planets/planetBackground.jpg");
+  surface     = loadImage("resources/planets/planetBackground.png");
   ship        = loadImage("resources/ships/ship.png");
   
   
