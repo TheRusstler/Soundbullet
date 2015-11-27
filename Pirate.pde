@@ -23,6 +23,12 @@ class Pirate {
     bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
   }
 
+  Bullet shoot() {
+    int y = bounds.y + bounds.height;
+    PVector pos = new PVector((int)bounds.getCenterX(), y);
+    return new Bullet(pos, new PVector(0, -5));
+  }
+
   void takeDamage() {
 
     // Captains take less damage
@@ -47,7 +53,7 @@ class Pirate {
     boolean offScreen = bounds.y < 2 * sprite.height;
     if (!reachedScreen) {
       if (offScreen) {
-        velocity.y = -3;
+        velocity.y = -1;
       } else {
         velocity.y = 0;
         reachedScreen = true;
@@ -61,25 +67,25 @@ class Pirate {
   float yoff = 0.0;
   boolean forwards = true;
   void navigate(PVector target) {
-    xoff = xoff + .01; // Noisy motion, increase for more
+    xoff = xoff + .05; // Noisy motion, increase for more
     yoff = yoff + .01;
-    
+
     // Aim x velocity towards target
     PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
     float a = atan((position.x - target.x) / (position.y - target.y));  
-    velocity.x = noise(xoff) * degrees(a)/2;
+    velocity.x = noise(xoff) * (a*5);
 
     // If ship if fully on screen
     if (reachedScreen) {
       // If too high or too low on screen, change direction.
-      if(position.y < height *.2) {
+      if (position.y < height *.2) {
         forwards = true;
       }
-      if(position.y > height * .4) {
+      if (position.y > height * .4) {
         forwards = false;
       }
-      
-      // Apply noise to velocities
+
+      // Apply noise to velocity
       if (forwards) {
         velocity.y = noise(yoff) * -3;
       } else {
@@ -89,7 +95,6 @@ class Pirate {
 
     fill(255);
     textMode(LEFT);
-    text("Angle: " + degrees(a), 50, 50);
   }
 
   void paint(PVector target) {

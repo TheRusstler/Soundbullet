@@ -5,6 +5,7 @@ class PlanetMode extends Scene {
 
   final int BACKGROUND_SCROLL_SPEED = 2;
   ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
+  ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>(); 
 
   int offset1 = surface.height*-1 + height;
   float tintRatio = 0.4;
@@ -15,7 +16,7 @@ class PlanetMode extends Scene {
 
     showStars = false;
     noCursor();
-    
+
     planet.song.play();
   }
 
@@ -24,18 +25,57 @@ class PlanetMode extends Scene {
   }
 
   void managePirates() {
-    detectBulletPirateCollisions();
-    
+    removeSpentBullets();
+    detectFriendlyBulletCollisions();
+    detectEnemyBulletCollisions();
+    enemyAttack();
+
     int surfaceX = width/2 - surface.width/2;
     if (pirates.size() < 1) {
-      pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
+      pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
+    } else if (pirates.size() < 8 && frameCount%100 == 0) {
+      pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
     }
-    //else if(pirates.size() < 8 && frameCount%200 == 0){
-    //  pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
-    //}
+  }
+  
+  void enemyAttack() {
+    for(Pirate p : pirates) {
+      if(random(0, 1000) < 100) {
+        enemyBullets.add(p.shoot());
+      }
+    }
   }
 
-  void detectBulletPirateCollisions() {
+  void removeSpentBullets() {
+    ArrayList<Bullet> destroyedBullets = new ArrayList();
+
+    for (Bullet b : enemyBullets) {
+      if (b.bounds.y > height + 5) {
+        destroyedBullets.add(b);
+      }
+    }
+
+    for (Bullet b : destroyedBullets) {
+      enemyBullets.remove(b);
+    }
+  }
+
+  void detectEnemyBulletCollisions() {
+    ArrayList<Bullet> destroyedBullets = new ArrayList();
+
+    for (Bullet b : enemyBullets) {
+      if (b.bounds.intersects(ship.bounds)) {
+        destroyedBullets.add(b);
+        ship.takeDamage();
+      }
+    }
+
+    for (Bullet b : destroyedBullets) {
+      enemyBullets.remove(b);
+    }
+  }
+
+  void detectFriendlyBulletCollisions() {
     ArrayList<Bullet> destroyedBullets = new ArrayList();
     ArrayList<Pirate> destroyedPirates = new ArrayList();
 
@@ -44,8 +84,8 @@ class PlanetMode extends Scene {
         if (p.bounds.intersects(b.bounds)) {
           destroyedBullets.add(b);
           p.takeDamage();
-          
-          if(p.isDestroyed()) {
+
+          if (p.isDestroyed()) {
             destroyedPirates.add(p);
           }
         }
@@ -66,12 +106,18 @@ class PlanetMode extends Scene {
     rectMode(CENTER);
 
     paintBackground();
+    
+    for(Bullet b : enemyBullets) {
+      b.paint();
+    }
+    
     ship.paint();
 
     for (Pirate p : pirates) {
       p.paint(new PVector((float)ship.bounds.getCenterX(), (float)ship.bounds.getCenterY()));
     }
 
+    text("Health: " + game.health, 50, 50);
     rectMode(CORNER);
   }
 

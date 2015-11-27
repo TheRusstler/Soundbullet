@@ -1,6 +1,6 @@
 class Ship extends Scene {
   boolean left, right, up, down, space;
-  int sensitivity = 10;
+  int sensitivity = 8;
   PImage sprite;
   Rectangle bounds;
 
@@ -16,7 +16,7 @@ class Ship extends Scene {
       sprite = shipDualGuns.copy();
     }
 
-    float ratio = 0.6;
+    float ratio = 0.3;
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle(width/2 - sprite.width/2, height-sprite.height - 20, sprite.width, sprite.height);
   }
@@ -88,15 +88,33 @@ class Ship extends Scene {
   void shoot() {
 
     int y = bounds.y + BULLET_Y_OFFSET;
+    Bullet b;
+    PVector vel = new PVector(0, 15);
+    PVector pos;
     if (game.dualGunsUpgrade) {
-      PVector pos = new PVector((int)bounds.getCenterX()-DUAL_GUNS_SPACING, y);
-      bullets.add(new Bullet(pos));
+      
+      pos = new PVector((int)bounds.getCenterX()-DUAL_GUNS_SPACING, y);
+      bullets.add(createBullet(pos,vel));
+      
       pos = new PVector((int)bounds.getCenterX()+DUAL_GUNS_SPACING, y);
-      bullets.add(new Bullet(pos));
+      bullets.add(createBullet(pos,vel));
+      
     } else {
-      PVector pos = new PVector((int)bounds.getCenterX(), y);
-      bullets.add(new Bullet(pos));
+      pos = new PVector((int)bounds.getCenterX(), y);
+      bullets.add(createBullet(pos,vel));
     }
+  }
+  
+  Bullet createBullet(PVector pos, PVector vel) {
+    Bullet result = new Bullet(pos, vel);
+    result.r = 0;
+    result.g = 200;
+    result.b = 0;
+    return result;
+  }
+
+  void takeDamage() {
+    game.health --;
   }
 
   void onKeyAction(boolean pressed) {
