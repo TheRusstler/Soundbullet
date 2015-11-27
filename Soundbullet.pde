@@ -7,6 +7,8 @@ final String SAVE_FILE = "data/save.json";
 
 PImage logoLarge, planetType1, planetType2, surface;
 PImage ship, shipDualGuns;
+PImage pirate, pirateCaptain;
+
 
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<SoundFile> music = new ArrayList<SoundFile>();
@@ -25,12 +27,14 @@ void setup() {
 }
 
 void loadResources() {
-  logoLarge   = loadImage("resources/logo/logo_large_transparent.png");
-  planetType1 = loadImage("resources/planets/red.png");
-  planetType2 = loadImage("resources/planets/green-planet.png");
-  surface     = loadImage("resources/planets/planetBackground.png");
-  ship        = loadImage("resources/ships/ship.png");
-  shipDualGuns        = loadImage("resources/ships/ship_upgraded.png");
+  logoLarge       = loadImage("resources/logo/logo_large_transparent.png");
+  planetType1     = loadImage("resources/planets/red.png");
+  planetType2     = loadImage("resources/planets/green-planet.png");
+  surface         = loadImage("resources/planets/planetBackground.png");
+  ship            = loadImage("resources/ships/ship.png");
+  pirate          = loadImage("resources/ships/pirate.png");
+  pirateCaptain   = loadImage("resources/ships/captain.png");
+  shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
   
   
   music.add(new SoundFile(this, "music/breathing_underwater.mp3"));

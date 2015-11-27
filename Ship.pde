@@ -5,17 +5,17 @@ class Ship extends Scene {
   Rectangle bounds;
 
   ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-  
+
   final int DUAL_GUNS_SPACING = 12, BULLET_Y_OFFSET = 10;
 
   public Ship() {
-    sprite = ship;
-        
+    sprite = ship.copy();
+
     // Check for upgrades
-    if(game.dualGunsUpgrade) {
+    if (game.dualGunsUpgrade) {
       sprite = shipDualGuns;
     }
-    
+
     float ratio = 0.6;
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle(width/2 - sprite.width/2, height-sprite.height - 20, sprite.width, sprite.height);
@@ -25,6 +25,7 @@ class Ship extends Scene {
     integrate();
 
     // Bullets
+    removeSpentBullets();
     for (Bullet b : bullets) {
       b.paint();
     }
@@ -36,6 +37,20 @@ class Ship extends Scene {
 
     imageMode(CORNER);
     image(sprite, bounds.x, bounds.y);
+  }
+
+  void removeSpentBullets() {
+    ArrayList<Bullet> destroyedBullets = new ArrayList();
+
+    for (Bullet b : bullets) {
+      if (b.bounds.y < 5) {
+        destroyedBullets.add(b);
+      }
+    }
+
+    for (Bullet b : destroyedBullets) {
+      bullets.remove(b);
+    }
   }
 
   void onClick() {

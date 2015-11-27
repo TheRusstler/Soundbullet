@@ -1,7 +1,9 @@
 class PlanetMode extends Scene {
 
-  private Planet planet;
-  private Ship ship;
+  Planet planet;
+  Ship ship;
+
+  ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
 
   int offset1 = surface.height*-1 + height;
   float tintRatio = 0.4;
@@ -9,6 +11,7 @@ class PlanetMode extends Scene {
   public PlanetMode(Planet planet) {
     this.planet = planet;
     this.ship = new Ship();
+
     showStars = false;
     noCursor();
   }
@@ -17,12 +20,50 @@ class PlanetMode extends Scene {
     showStars = true;
   }
 
+  void managePirates() {
+    detectBulletPirateCollisions();
+    
+    if (pirates.size() < 1) {
+      pirates.add(new Pirate(false, new PVector(width/2, height/2)));
+    }
+  }
+
+  void detectBulletPirateCollisions() {
+    ArrayList<Bullet> destroyedBullets = new ArrayList();
+    ArrayList<Pirate> destroyedPirates = new ArrayList();
+
+    for (Pirate p : pirates) {
+      for (Bullet b : ship.bullets) {
+        if (p.bounds.intersects(b.bounds)) {
+          destroyedBullets.add(b);
+          p.takeDamage();
+          
+          if(p.isDestroyed()) {
+            destroyedPirates.add(p);
+          }
+        }
+      }
+    }
+
+    for (Bullet b : destroyedBullets) {
+      ship.bullets.remove(b);
+    }
+    for (Pirate p : destroyedPirates) {
+      pirates.remove(p);
+    }
+  }
+
   void paint() {
+    managePirates();
+
     rectMode(CENTER);
 
     paintBackground();
     ship.paint();
 
+    for (Pirate p : pirates) {
+      p.paint();
+    }
 
     rectMode(CORNER);
   }
@@ -45,7 +86,7 @@ class PlanetMode extends Scene {
     image(surface, width/2 - surface.width/2, offset1);
 
     offset1 += 4;
-   
+
     noTint();
   }
 
