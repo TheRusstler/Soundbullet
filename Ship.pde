@@ -1,9 +1,11 @@
 class Ship extends Scene {
-  boolean left, right, up, down;
+  boolean left, right, up, down, space;
   int sensitivity = 10;
-  boolean isDualCannons = false;
+  boolean isDualCannons = true;
   PImage sprite;
-  private Rectangle bounds;
+  Rectangle bounds;
+  
+  ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
   public Ship() {
     sprite = ship.copy();
@@ -12,14 +14,18 @@ class Ship extends Scene {
     bounds = new Rectangle(width/2 - sprite.width/2, height-sprite.height - 20, sprite.width, sprite.height);
   }
 
-  public void paint() {
+  void paint() {
     integrate();
-    fill(200, 0, 0);
+    
+    // Bullets
+    for(Bullet b : bullets) {
+      b.paint();
+    }
     
     // Debug to see ship bounds.
-    rectMode(CORNER);
-    fill(255, 255, 255, 50);
-    rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
+    //rectMode(CORNER);
+    //fill(255, 255, 255, 50);
+    //rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
     
     imageMode(CORNER);
     image(sprite, bounds.x, bounds.y);
@@ -43,6 +49,10 @@ class Ship extends Scene {
     if (down && bounds.y + bounds.height < height) {
       bounds.y = bounds.y + sensitivity;
     }
+    
+    if(space) {
+      shoot();
+    }
   }
 
   void onKeyPressed() {
@@ -51,6 +61,11 @@ class Ship extends Scene {
 
   void onKeyReleased() {
     onKeyAction(false);
+  }
+  
+  void shoot() {
+    PVector pos = new PVector((int)bounds.getCenterX(), bounds.y);
+    bullets.add(new Bullet(pos));
   }
 
   void onKeyAction(boolean pressed) {
@@ -68,6 +83,8 @@ class Ship extends Scene {
       case 's':
         down = pressed;
         break;
+      case ' ':
+        space = pressed;
       default:
         break;
       }
