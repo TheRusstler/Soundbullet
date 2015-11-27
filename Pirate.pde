@@ -46,11 +46,20 @@ class Pirate {
     
     // Travel down to a certain y
     if(bounds.y < 2 * sprite.height) {
-      velocity.y = -1;
+      velocity.y = -3;
     }
     else {
       velocity.y = 0;
     }
+    
+    // Aim x velocity towards target
+    PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
+    float a = atan((position.x - target.x) / (position.y - target.y));  
+    velocity.x = degrees(a)/5;
+    
+    fill(255);
+    textMode(LEFT);
+    text("Angle: " + degrees(a), 50, 50);
   }
 
   void paint(PVector target) {

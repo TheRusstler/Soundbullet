@@ -30,9 +30,9 @@ class PlanetMode extends Scene {
     if (pirates.size() < 1) {
       pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
     }
-    else if(pirates.size() < 8 && frameCount%200 == 0){
-      pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
-    }
+    //else if(pirates.size() < 8 && frameCount%200 == 0){
+    //  pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
+    //}
   }
 
   void detectBulletPirateCollisions() {
