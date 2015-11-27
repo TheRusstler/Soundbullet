@@ -22,41 +22,71 @@ class Pirate {
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
   }
-  
+
   void takeDamage() {
-    
+
     // Captains take less damage
     if (isCaptain) {
       health -= 1;
-    }
-    else {
+    } else {
       health -= 3;
     }
-    
   }
-  
+
   boolean isDestroyed() {
     return health <= 0;
   }
 
+  boolean reachedScreen = false;
   // Use target to update velocity.
   void integrate(PVector target) {
     bounds.x += velocity.x; 
     bounds.y -= velocity.y; 
-    
+
     // Travel down to a certain y
-    if(bounds.y < 2 * sprite.height) {
-      velocity.y = -3;
+    boolean offScreen = bounds.y < 2 * sprite.height;
+    if (!reachedScreen) {
+      if (offScreen) {
+        velocity.y = -3;
+      } else {
+        velocity.y = 0;
+        reachedScreen = true;
+      }
     }
-    else {
-      velocity.y = 0;
-    }
+
+    navigate(target);
+  }
+
+  float xoff = 0.0;
+  float yoff = 0.0;
+  boolean forwards = true;
+  void navigate(PVector target) {
+    xoff = xoff + .01; // Noisy motion, increase for more
+    yoff = yoff + .01;
     
     // Aim x velocity towards target
     PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
     float a = atan((position.x - target.x) / (position.y - target.y));  
-    velocity.x = degrees(a)/5;
-    
+    velocity.x = noise(xoff) * degrees(a)/2;
+
+    // If ship if fully on screen
+    if (reachedScreen) {
+      // If too high or too low on screen, change direction.
+      if(position.y < height *.2) {
+        forwards = true;
+      }
+      if(position.y > height * .4) {
+        forwards = false;
+      }
+      
+      // Apply noise to velocities
+      if (forwards) {
+        velocity.y = noise(yoff) * -3;
+      } else {
+        velocity.y = noise(yoff) * 3;
+      }
+    }
+
     fill(255);
     textMode(LEFT);
     text("Angle: " + degrees(a), 50, 50);
