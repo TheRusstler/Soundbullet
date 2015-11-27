@@ -1,17 +1,28 @@
 class Ship extends Scene {
-
-  PVector position, velocity;
   boolean left, right, up, down;
   int sensitivity = 10;
+  boolean isDualCannons = false;
+  PImage sprite;
+  private Rectangle bounds;
 
   public Ship() {
-    position = new PVector(width/2, height-50);
+    sprite = ship.copy();
+    float ratio = 0.75;
+    sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
+    bounds = new Rectangle(width/2 - sprite.width/2, height-sprite.height - 20, sprite.width, sprite.height);
   }
 
   public void paint() {
     integrate();
     fill(200, 0, 0);
-    rect(position.x, position.y, 50, 50);
+    
+    imageMode(CORNER);
+    image(sprite, bounds.x, bounds.y);
+    
+    rectMode(CORNER);
+    
+    fill(255, 255, 255, 50);
+    rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
   }
 
   void onClick() {
@@ -20,17 +31,17 @@ class Ship extends Scene {
   void integrate() {
     int margin = (width - surface.width)/2;
     
-    if (left && position.x > margin) {
-      position.x = position.x - sensitivity;
+    if (left && bounds.x > margin) {
+      bounds.x = bounds.x - sensitivity;
     }
-    if (right && position.x < (width - margin)) {
-      position.x = position.x + sensitivity;
+    if (right && bounds.x + bounds.width < (width - margin)) {
+      bounds.x = bounds.x + sensitivity;
     }
-    if (up && position.y > 0) {
-      position.y = position.y - sensitivity;
+    if (up && bounds.y > 0) {
+      bounds.y = bounds.y - sensitivity;
     }
-    if (down && position.y < height) {
-      position.y = position.y + sensitivity;
+    if (down && bounds.y + bounds.height < height) {
+      bounds.y = bounds.y + sensitivity;
     }
   }
 

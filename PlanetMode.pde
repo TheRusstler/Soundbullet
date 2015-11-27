@@ -45,6 +45,8 @@ class PlanetMode extends Scene {
     image(surface, width/2 - surface.width/2, offset1);
 
     offset1 += 5;
+    
+    noTint();
   }
 
 

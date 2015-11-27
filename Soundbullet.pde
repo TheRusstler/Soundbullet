@@ -3,36 +3,37 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import processing.sound.*;
 
-// Resources
+final String SAVE_FILE = "data/save.json";
+
 PImage logoLarge, planetType1, planetType2, surface;
+PImage ship;
 
 ArrayList<Star> stars = new ArrayList<Star>();
-
 ArrayList<SoundFile> music = new ArrayList<SoundFile>();
-final String SAVE_FILE = "data/save.json";
 boolean showStars = true;
 
-// Current scene
 Scene scene;
 Universe universe;
-
-// Game state
 Game game = null;
 
 void setup() {
   fullScreen();
-
   imageMode(CENTER);
+  
+  loadResources();
+  setScene(new Menu(), true);
+}
 
+void loadResources() {
   logoLarge   = loadImage("resources/logo/logo_large_transparent.png");
   planetType1 = loadImage("resources/planets/red.png");
   planetType2 = loadImage("resources/planets/green-planet.png");
-  surface = loadImage("resources/planets/planetBackground.jpg");
-
+  surface     = loadImage("resources/planets/planetBackground.jpg");
+  surface     = loadImage("resources/planets/planetBackground.jpg");
+  ship        = loadImage("resources/ships/ship.png");
+  
+  
   music.add(new SoundFile(this, "music/breathing_underwater.mp3"));
-
-  // Menu is the start scene.
-  setScene(new Menu(), true);
 }
 
 void draw() {
