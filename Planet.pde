@@ -48,6 +48,7 @@ class Planet extends Scene {
 
     if (bounds.contains(mouseX, mouseY)) {
       fill(255,30);
+      ellipseMode(CENTER);
       ellipse(0, 0, diameter*0.85, diameter*0.85);
     }
 

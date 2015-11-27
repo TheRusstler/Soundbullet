@@ -13,7 +13,7 @@ class Ship extends Scene {
 
     // Check for upgrades
     if (game.dualGunsUpgrade) {
-      sprite = shipDualGuns;
+      sprite = shipDualGuns.copy();
     }
 
     float ratio = 0.6;

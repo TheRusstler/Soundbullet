@@ -3,6 +3,7 @@ class PlanetMode extends Scene {
   Planet planet;
   Ship ship;
 
+  final int BACKGROUND_SCROLL_SPEED = 2;
   ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
 
   int offset1 = surface.height*-1 + height;
@@ -14,6 +15,8 @@ class PlanetMode extends Scene {
 
     showStars = false;
     noCursor();
+    
+    planet.song.play();
   }
 
   public void exitPlanetMode() {
@@ -23,8 +26,11 @@ class PlanetMode extends Scene {
   void managePirates() {
     detectBulletPirateCollisions();
     
+    int surfaceX = width/2 - surface.width/2;
     if (pirates.size() < 1) {
-      int surfaceX = width/2 - surface.width/2;
+      pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
+    }
+    else if(pirates.size() < 8 && frameCount%200 == 0){
       pirates.add(new Pirate(false, random(surfaceX + 50,  surfaceX + surface.width -50)));
     }
   }
@@ -86,14 +92,14 @@ class PlanetMode extends Scene {
 
     image(surface, width/2 - surface.width/2, offset1);
 
-    offset1 += 4;
+    offset1 += BACKGROUND_SCROLL_SPEED;
 
     noTint();
   }
 
 
   void onClick() {
-    //planet.song.play();
+    planet.song.stop();
     returnToUniverse();
   }
 

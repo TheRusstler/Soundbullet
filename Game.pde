@@ -1,7 +1,7 @@
 class Game {
   private String player;
   private int health = 100, points = 10;
-  private boolean dualGunsUpgrade = false;
+  private boolean dualGunsUpgrade = true;
 
   public Game(String player) {
     this.player = player;
