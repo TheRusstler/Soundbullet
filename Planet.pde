@@ -5,12 +5,12 @@ class Planet extends Scene {
   PVector position;
   int diameter;
   int r, g, b;
-  SoundFile song;
+  AudioPlayer song;
   String name, description;
 
   Ellipse2D bounds;
 
-  public Planet(int x, int y, String name, SoundFile song, String description) {
+  public Planet(int x, int y, String name, AudioPlayer song, String description) {
     this.position =  new PVector(x, y);
     this.name = name;
     this.song = song;

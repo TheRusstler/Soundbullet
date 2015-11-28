@@ -1,9 +1,11 @@
 import java.awt.geom.*;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import processing.sound.*;
+import ddf.minim.*;
 
 final String SAVE_FILE = "data/save.json";
+
+Minim minim;
 
 PImage logoLarge, planetType1, planetType2, surface;
 PImage ship, shipDualGuns;
@@ -11,7 +13,7 @@ PImage pirate, pirateCaptain;
 
 
 ArrayList<Star> stars = new ArrayList<Star>();
-ArrayList<SoundFile> music = new ArrayList<SoundFile>();
+ArrayList<AudioPlayer> music = new ArrayList<AudioPlayer>();
 boolean showStars = true;
 
 Scene scene;
@@ -21,7 +23,7 @@ Game game = null;
 void setup() {
   fullScreen();
   imageMode(CENTER); 
-  
+  minim = new Minim(this);
   loadResources();
   setScene(new Menu(), true);
 }
@@ -37,7 +39,7 @@ void loadResources() {
   shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
   
   
-  music.add(new SoundFile(this, "music/breathing_underwater.mp3"));
+  music.add(minim.loadFile("music/breathing_underwater.mp3"));
 }
 
 void draw() {

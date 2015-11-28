@@ -17,6 +17,7 @@ class PlanetMode extends Scene {
     showStars = false;
     noCursor();
 
+    planet.song.cue(1000 * 120);
     planet.song.play();
   }
 
@@ -37,10 +38,15 @@ class PlanetMode extends Scene {
       pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
     }
   }
-  
+
+  double getAudioMixLevel() {
+    return planet.song.mix.level()*1000;
+  }
+
   void enemyAttack() {
-    for(Pirate p : pirates) {
-      if(random(0, 1000) < 100) {
+    boolean fire = getAudioMixLevel() > 100;
+    if (frameCount % 5 == 0 && fire) {
+      for (Pirate p : pirates) {
         enemyBullets.add(p.shoot());
       }
     }
@@ -106,11 +112,11 @@ class PlanetMode extends Scene {
     rectMode(CENTER);
 
     paintBackground();
-    
-    for(Bullet b : enemyBullets) {
+
+    for (Bullet b : enemyBullets) {
       b.paint();
     }
-    
+
     ship.paint();
 
     for (Pirate p : pirates) {
@@ -121,12 +127,15 @@ class PlanetMode extends Scene {
     rectMode(CORNER);
   }
 
+  float mixLevel = 1;
   void paintBackground() {
     imageMode(CORNER);
 
+    float ratio = tintRatio;
+
     fill(0);
     rect(0, 0, width, height);
-    tint(planet.r * tintRatio, planet.g * tintRatio, planet.b * tintRatio);
+    tint(planet.r * ratio, planet.g * ratio, planet.b * ratio);
 
     if (offset1 >= 0) {
       if (offset1 > height) {
@@ -145,7 +154,8 @@ class PlanetMode extends Scene {
 
 
   void onClick() {
-    planet.song.stop();
+    planet.song.pause();
+    planet.song.rewind();
     returnToUniverse();
   }
 
