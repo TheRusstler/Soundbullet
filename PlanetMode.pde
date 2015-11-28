@@ -17,8 +17,8 @@ class PlanetMode extends Scene {
     showStars = false;
     noCursor();
 
-    planet.song.cue(1000 * 120);
-    planet.song.play();
+    //planet.song.track.cue(1000 * 120);
+    planet.song.track.play();
   }
 
   public void exitPlanetMode() {
@@ -40,7 +40,7 @@ class PlanetMode extends Scene {
   }
 
   double getAudioMixLevel() {
-    return planet.song.mix.level()*1000;
+    return planet.song.track.mix.level()*1000;
   }
 
   double fireRate = 0; // 0 - 250 normal range
@@ -157,8 +157,8 @@ class PlanetMode extends Scene {
 
 
   void onClick() {
-    planet.song.pause();
-    planet.song.rewind();
+    planet.song.track.pause();
+    planet.song.track.rewind();
     returnToUniverse();
   }
 

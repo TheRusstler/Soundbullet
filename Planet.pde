@@ -5,14 +5,13 @@ class Planet extends Scene {
   PVector position;
   int diameter;
   int r, g, b;
-  AudioPlayer song;
-  String name, description;
+  Song song;
+  String description;
 
   Ellipse2D bounds;
 
-  public Planet(int x, int y, String name, AudioPlayer song, String description) {
+  public Planet(int x, int y, Song song, String description) {
     this.position =  new PVector(x, y);
-    this.name = name;
     this.song = song;
     this.description = description;
 
@@ -69,7 +68,7 @@ class Planet extends Scene {
     textSize(12);
     textAlign(LEFT, TOP);
     fill(255);
-    text(name + "\n\n" + description, 
+    text(song.name.substring(0,song.name.length() - 4) + "\n\n" + description, 
       mouseX + PLANET_WINDOW_PADDING,
       mouseY + PLANET_WINDOW_PADDING, 
       PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2,

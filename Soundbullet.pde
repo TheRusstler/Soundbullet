@@ -13,7 +13,7 @@ PImage pirate, pirateCaptain;
 
 
 ArrayList<Star> stars = new ArrayList<Star>();
-ArrayList<AudioPlayer> music = new ArrayList<AudioPlayer>();
+ArrayList<Song> music = new ArrayList<Song>();
 boolean showStars = true;
 
 Scene scene;
@@ -22,9 +22,12 @@ Game game = null;
 
 void setup() {
   fullScreen();
+  //size(800, 600);
   imageMode(CENTER); 
   minim = new Minim(this);
+  
   loadResources();
+  loadMusic();
   setScene(new Menu(), true);
 }
 
@@ -37,14 +40,17 @@ void loadResources() {
   pirate          = loadImage("resources/ships/pirate.png");
   pirateCaptain   = loadImage("resources/ships/captain.png");
   shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
+}
+
+void loadMusic() {
+  File folder = new File(dataPath("") + "/music");
+  System.out.println(folder.getAbsolutePath());
   
-  
-  music.add(minim.loadFile("music/breathing_underwater.mp3"));
-  music.add(minim.loadFile("music/higher_ground.mp3"));
-  music.add(minim.loadFile("music/hollywood_principles.mp3"));
-  
-  
-  
+  for(File file : folder.listFiles()) { //<>//
+    if(file.getName().endsWith(".mp3")) {
+      music.add(new Song(file.getName(), minim.loadFile("music/" + file.getName())));
+    }
+  }
 }
 
 void draw() {

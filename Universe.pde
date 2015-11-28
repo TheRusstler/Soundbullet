@@ -16,17 +16,14 @@ class Universe extends Scene {
      ));
 
     // TODO: Be more creative :3
-    addPlanet(new Planet(200, 250, "Home", 
-      music.get(0), 
-      "There's no place like it.\nTravel here for ship repairs and upgrades."));
-
-    addPlanet(new Planet(300, 490, "Hollywood Principle", music.get(2), "A dangerous planet"));
-    addPlanet(new Planet(210, 670, "Higher Ground", music.get(1), "Just before sunrise, the sky turns a warm shade of violet here"));
-    addPlanet(new Planet(850, 210, "Dactyl", music.get(0), "Rumour has it, infant Zeus was hidden and raised here"));
-    addPlanet(new Planet(900, 430, "Callisto", music.get(0), "Once described as \"The most unintresting planet ever visited\""));
-    addPlanet(new Planet(820, 630, "Elara", music.get(0), ""));
-    addPlanet(new Planet(600, 350, "Leda", music.get(0), ""));
-    addPlanet(new Planet(560, 610, "Mneme", music.get(0), ""));
+    addPlanet(new Planet(200, 250, music.get(0), "There's no place like it.\nTravel here for ship repairs and upgrades."));
+    addPlanet(new Planet(300, 490, music.get(1), "A dangerous planet"));
+    addPlanet(new Planet(210, 670, music.get(2), "Just before sunrise, the sky turns a warm shade of violet here"));
+    addPlanet(new Planet(850, 210, music.get(3), "Rumour has it, infant Zeus was hidden and raised here"));
+    addPlanet(new Planet(900, 430, music.get(4), "Once described as \"The most unintresting planet ever visited\""));
+    addPlanet(new Planet(820, 630, music.get(5), ""));
+    addPlanet(new Planet(600, 350, music.get(6), ""));
+    addPlanet(new Planet(560, 610, music.get(7), ""));
   }
 
   void addPlanet(Planet planet) {
