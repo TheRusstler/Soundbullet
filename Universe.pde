@@ -20,8 +20,8 @@ class Universe extends Scene {
       music.get(0), 
       "There's no place like it.\nTravel here for ship repairs and upgrades."));
 
-    addPlanet(new Planet(300, 490, "Gaspra", music.get(0), "A dangerous planet"));
-    addPlanet(new Planet(210, 670, "Ida", music.get(0), "Just before sunrise, the sky turns a warm shade of violet here"));
+    addPlanet(new Planet(300, 490, "Hollywood Principle", music.get(2), "A dangerous planet"));
+    addPlanet(new Planet(210, 670, "Higher Ground", music.get(1), "Just before sunrise, the sky turns a warm shade of violet here"));
     addPlanet(new Planet(850, 210, "Dactyl", music.get(0), "Rumour has it, infant Zeus was hidden and raised here"));
     addPlanet(new Planet(900, 430, "Callisto", music.get(0), "Once described as \"The most unintresting planet ever visited\""));
     addPlanet(new Planet(820, 630, "Elara", music.get(0), ""));

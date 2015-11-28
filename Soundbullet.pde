@@ -40,6 +40,11 @@ void loadResources() {
   
   
   music.add(minim.loadFile("music/breathing_underwater.mp3"));
+  music.add(minim.loadFile("music/higher_ground.mp3"));
+  music.add(minim.loadFile("music/hollywood_principles.mp3"));
+  
+  
+  
 }
 
 void draw() {

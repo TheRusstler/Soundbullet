@@ -43,9 +43,12 @@ class PlanetMode extends Scene {
     return planet.song.mix.level()*1000;
   }
 
+  double fireRate = 0; // 0 - 250 normal range
   void enemyAttack() {
-    boolean fire = getAudioMixLevel() > 100;
-    if (frameCount % 5 == 0 && fire) {
+    fireRate = getAudioMixLevel();
+    boolean fire = random(50, 300) < (float)getAudioMixLevel();
+    
+    if (frameCount % 3 == 0 && fire) {
       for (Pirate p : pirates) {
         enemyBullets.add(p.shoot());
       }
