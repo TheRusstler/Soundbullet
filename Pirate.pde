@@ -60,11 +60,12 @@ class Pirate {
   boolean reachedScreen = false;
   // Use target to update velocity.
   void integrate(PVector target) {
+    
     bounds.x += velocity.x; 
     bounds.y -= velocity.y; 
 
     // Travel down to a certain y
-    boolean offScreen = bounds.y < 2 * sprite.height;
+    boolean offScreen = bounds.getCenterY() < height/3;
     if (!reachedScreen) {
       if (offScreen) {
         velocity.y = -1;

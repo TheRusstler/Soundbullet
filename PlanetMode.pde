@@ -122,7 +122,13 @@ class PlanetMode extends Scene {
 
           if (p.isDestroyed()) {
             destroyedPirates.add(p);
-            game.points += 100;
+
+            if (p.isCaptain) { 
+              game.points += 1000;
+              win();
+            } else {
+              game.points += 100;
+            }
           }
         }
       }
@@ -188,6 +194,10 @@ class PlanetMode extends Scene {
   }
 
   void lose() {
+    returnToUniverse();
+  }
+  
+  void win() {
     returnToUniverse();
   }
 
