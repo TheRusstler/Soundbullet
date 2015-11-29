@@ -6,14 +6,17 @@ class PlanetMode extends Scene {
   final int BACKGROUND_SCROLL_SPEED = 2;
   ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>(); 
+  HUD headsUpDisplay;
 
-  int offset1 = surface.height*-1 + height;
   float tintRatio = 0.4;
+  int offset1 = surface.height * -1 + height;
+
 
   public PlanetMode(Planet planet) {
     this.planet = planet;
     this.ship = new Ship();
-
+    this.headsUpDisplay = new HUD();
+    
     showStars = false;
     noCursor();
 
@@ -47,7 +50,7 @@ class PlanetMode extends Scene {
   void enemyAttack() {
     fireRate = getAudioMixLevel();
     boolean fire = random(50, 300) < (float)getAudioMixLevel();
-    
+
     if (frameCount % 3 == 0 && fire) {
       for (Pirate p : pirates) {
         enemyBullets.add(p.shoot());
@@ -76,6 +79,11 @@ class PlanetMode extends Scene {
       if (b.bounds.intersects(ship.bounds)) {
         destroyedBullets.add(b);
         ship.takeDamage();
+
+        if (game.health <= 0) {
+          game.health = 0;
+          lose();
+        }
       }
     }
 
@@ -93,9 +101,11 @@ class PlanetMode extends Scene {
         if (p.bounds.intersects(b.bounds)) {
           destroyedBullets.add(b);
           p.takeDamage();
+          game.points++;
 
           if (p.isDestroyed()) {
             destroyedPirates.add(p);
+            game.points += 100;
           }
         }
       }
@@ -111,10 +121,9 @@ class PlanetMode extends Scene {
 
   void paint() {
     managePirates();
-
-    rectMode(CENTER);
-
     paintBackground();
+    
+    headsUpDisplay.paint();
 
     for (Bullet b : enemyBullets) {
       b.paint();
@@ -125,20 +134,13 @@ class PlanetMode extends Scene {
     for (Pirate p : pirates) {
       p.paint(new PVector((float)ship.bounds.getCenterX(), (float)ship.bounds.getCenterY()));
     }
-
-    text("Health: " + game.health, 50, 50);
-    rectMode(CORNER);
   }
 
-  float mixLevel = 1;
   void paintBackground() {
     imageMode(CORNER);
-
-    float ratio = tintRatio;
-
     fill(0);
     rect(0, 0, width, height);
-    tint(planet.r * ratio, planet.g * ratio, planet.b * ratio);
+    tint(planet.r * tintRatio, planet.g * tintRatio, planet.b * tintRatio);
 
     if (offset1 >= 0) {
       if (offset1 > height) {
@@ -157,8 +159,6 @@ class PlanetMode extends Scene {
 
 
   void onClick() {
-    planet.song.track.pause();
-    planet.song.track.rewind();
     returnToUniverse();
   }
 
@@ -170,7 +170,14 @@ class PlanetMode extends Scene {
     ship.onKeyReleased();
   }
 
+  void lose() {
+    returnToUniverse();
+  }
+
   void returnToUniverse() {
+    planet.song.track.pause();
+    planet.song.track.rewind();
+
     setScene(universe, false); 
     showStars = true;
     cursor();

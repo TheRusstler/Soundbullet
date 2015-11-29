@@ -72,7 +72,7 @@ class Pirate {
 
     // Aim x velocity towards target
     PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
-    float a = atan((position.x - target.x) / (position.y - target.y));  
+    float a = atan((position.x - target.x) / -Math.abs((position.y - target.y)));  
     velocity.x = noise(xoff) * (a*5);
 
     // If ship if fully on screen

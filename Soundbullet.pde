@@ -53,6 +53,24 @@ void loadMusic() {
   }
 }
 
+/*
+ * Set scene navigates the main window to a given scene.
+ */
+void setScene(Scene scene, boolean refreshStars) {
+  if (refreshStars) {
+    stars = new ArrayList<Star>();
+    for (int i=0; i < 500; i++) {
+      stars.add(new Star(random(width), random(height)));
+    }
+  }
+
+  this.scene = scene;
+}
+
+void menuLogo() {
+  image(logoLarge, logoLarge.width/2, logoLarge.height/2);
+}
+
 void draw() {
   drawBackground();
   scene.paint();
@@ -80,20 +98,4 @@ void keyPressed() {
 
 void keyReleased() {
   scene.onKeyReleased();
-}
-
-// Navigation
-void setScene(Scene scene, boolean refreshStars) {
-  if (refreshStars) {
-    stars = new ArrayList<Star>();
-    for (int i=0; i < 500; i++) {
-      stars.add(new Star(random(width), random(height)));
-    }
-  }
-
-  this.scene = scene;
-}
-
-void menuLogo() {
-  image(logoLarge, logoLarge.width/2, logoLarge.height/2);
 }

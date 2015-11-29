@@ -21,8 +21,8 @@ class Universe extends Scene {
     addPlanet(new Planet(210, 670, music.get(2), "Just before sunrise, the sky turns a warm shade of violet here"));
     addPlanet(new Planet(850, 210, music.get(3), "Rumour has it, infant Zeus was hidden and raised here"));
     addPlanet(new Planet(900, 430, music.get(4), "Once described as \"The most unintresting planet ever visited\""));
-    addPlanet(new Planet(820, 630, music.get(5), ""));
-    addPlanet(new Planet(600, 350, music.get(6), ""));
+    addPlanet(new Planet(820, 630, music.get(5), "A cold place"));
+    addPlanet(new Planet(600, 350, music.get(6), "Seven ships have vanished here"));
     addPlanet(new Planet(560, 610, music.get(7), ""));
   }
 
@@ -64,14 +64,14 @@ class Universe extends Scene {
     textAlign(CENTER, TOP);
     textSize(20);
     fill(255);
-    text(String.format("CAPTAIN %s", game.getPlayerName()), hudX + HUD_WIDTH/2, hudY + 30);
+    text(String.format("CAPTAIN %s", game.player), hudX + HUD_WIDTH/2, hudY + 30);
    
     textSize(16);
     text("STATUS REPORT:", hudX + HUD_WIDTH/2, hudY + 80);
     
     textSize(14);
-    text("Health: " + game.getShipHealth() + "%" , hudX + HUD_WIDTH/2, hudY + 110);
-    text("Points: " + game.getPoints(), hudX + HUD_WIDTH/2, hudY + 140);
+    text("Health: " + game.health + "%" , hudX + HUD_WIDTH/2, hudY + 110);
+    text("Points: " + game.points, hudX + HUD_WIDTH/2, hudY + 140);
     text("Online ranking: #" + game.getOnlineRanking(), hudX + HUD_WIDTH/2, hudY + 170);
     text("Empire size: " + game.getOnlineRanking(), hudX + HUD_WIDTH/2, hudY + 200);
   }

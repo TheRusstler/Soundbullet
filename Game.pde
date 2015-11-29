@@ -12,18 +12,6 @@ class Game {
     this.health = health;
     this.points = points;
   }
-
-  public String getPlayerName() {
-    return this.player;
-  }
-
-  public int getShipHealth() {
-    return this.health;
-  }
-  
-  public int getPoints() {
-    return this.points;
-  }
   
   public int getOnlineRanking() {
     return 1;
