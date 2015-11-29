@@ -10,17 +10,18 @@ class PlanetMode extends Scene {
 
   float tintRatio = 0.4;
   int offset1 = surface.height * -1 + height;
-
+  double fireRate = 0; // 0 - 250 normal range
+  boolean captainSpawned = false;
 
   public PlanetMode(Planet planet) {
     this.planet = planet;
     this.ship = new Ship();
     this.headsUpDisplay = new HUD();
-    
+
     showStars = false;
     noCursor();
 
-    //planet.song.track.cue(1000 * 120);
+    planet.song.track.cue(1000 * 270);
     planet.song.track.play();
   }
 
@@ -33,12 +34,27 @@ class PlanetMode extends Scene {
     detectFriendlyBulletCollisions();
     detectEnemyBulletCollisions();
     enemyAttack();
+    spawnPirates();
+  }
 
-    int surfaceX = width/2 - surface.width/2;
-    if (pirates.size() < 1) {
-      pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
-    } else if (pirates.size() < 8 && frameCount%100 == 0) {
-      pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
+  void spawnPirates() {
+    if (!captainSpawned) {
+
+      // Spawn captain if near the end.
+      if (planet.song.track.length() - planet.song.track.position() < 30000) {
+        pirates.add(new Pirate(true, width/2));
+        captainSpawned = true;
+      } 
+      
+      // Otherwise, keep spawning pirates.
+      else {        
+        int surfaceX = width/2 - surface.width/2;
+        if (pirates.size() < 1) {
+          pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
+        } else if (pirates.size() < 8 && frameCount%100 == 0) {
+          pirates.add(new Pirate(false, random(surfaceX + 50, surfaceX + surface.width -50)));
+        }
+      }
     }
   }
 
@@ -46,7 +62,6 @@ class PlanetMode extends Scene {
     return planet.song.track.mix.level()*1000;
   }
 
-  double fireRate = 0; // 0 - 250 normal range
   void enemyAttack() {
     fireRate = getAudioMixLevel();
     boolean fire = random(50, 300) < (float)getAudioMixLevel();
@@ -122,7 +137,7 @@ class PlanetMode extends Scene {
   void paint() {
     managePirates();
     paintBackground();
-    
+
     headsUpDisplay.paint();
 
     for (Bullet b : enemyBullets) {

@@ -1,7 +1,8 @@
 import java.awt.geom.*;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.ArrayList;
 import ddf.minim.*;
+import java.awt.geom.RectangularShape;
 
 final String SAVE_FILE = "data/save.json";
 
@@ -38,7 +39,7 @@ void loadResources() {
   surface         = loadImage("resources/planets/planetBackground.png");
   ship            = loadImage("resources/ships/ship.png");
   pirate          = loadImage("resources/ships/pirate.png");
-  pirateCaptain   = loadImage("resources/ships/captain.png");
+  pirateCaptain   = loadImage("resources/ships/captainShield.png");
   shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
 }
 

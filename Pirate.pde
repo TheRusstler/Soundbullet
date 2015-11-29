@@ -2,7 +2,7 @@ class Pirate {
 
   PImage sprite;
   PVector velocity;
-  Rectangle bounds;
+  Shape bounds;
   int health = 100;
 
   // Captain is bigger and stronger
@@ -16,16 +16,21 @@ class Pirate {
 
     if (isCaptain) {
       sprite = pirateCaptain.copy();
+      health = 500;
     }
 
     float ratio = 0.6;
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
+    
+    if (isCaptain) {
+      bounds = new Ellipse2D.Float((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
+    }
   }
 
   Bullet shoot() {
-    int y = bounds.y + bounds.height;
-    PVector pos = new PVector((int)bounds.getCenterX(), y);
+    int y = bounds.getBounds().y + bounds.getBounds().height;
+    PVector pos = new PVector((int)bounds.getBounds().getCenterX(), y);
     return new Bullet(pos, new PVector(0, -5));
   }
 
@@ -46,11 +51,11 @@ class Pirate {
   boolean reachedScreen = false;
   // Use target to update velocity.
   void integrate(PVector target) {
-    bounds.x += velocity.x; 
-    bounds.y -= velocity.y; 
+    bounds.getBounds().x += velocity.x; 
+    bounds.getBounds().y -= velocity.y; 
 
     // Travel down to a certain y
-    boolean offScreen = bounds.y < 2 * sprite.height;
+    boolean offScreen = bounds.getBounds().y < 2 * sprite.height;
     if (!reachedScreen) {
       if (offScreen) {
         velocity.y = -1;
@@ -71,12 +76,12 @@ class Pirate {
     yoff = yoff + .01;
 
     // Aim x velocity towards target
-    PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
+    PVector position = new PVector((float)bounds.getBounds().getCenterX(), (float)bounds.getBounds().getCenterY());
     float a = atan((position.x - target.x) / -Math.abs((position.y - target.y)));  
     velocity.x = noise(xoff) * (a*5);
 
     // If ship if fully on screen
-    if (reachedScreen) {
+    if (reachedScreen) { 
       // If too high or too low on screen, change direction.
       if (position.y < height *.2) {
         forwards = true;
@@ -101,6 +106,6 @@ class Pirate {
     integrate(target);
 
     imageMode(CORNER);
-    image(sprite, bounds.x, bounds.y);
+    image(sprite, bounds.getBounds().x, bounds.getBounds().y);
   }
 }
