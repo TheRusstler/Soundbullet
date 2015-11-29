@@ -45,7 +45,7 @@ class PlanetMode extends Scene {
         pirates.add(new Pirate(true, width/2));
         captainSpawned = true;
       } 
-      
+
       // Otherwise, keep spawning pirates.
       else {        
         int surfaceX = width/2 - surface.width/2;
@@ -66,9 +66,11 @@ class PlanetMode extends Scene {
     fireRate = getAudioMixLevel();
     boolean fire = random(50, 300) < (float)getAudioMixLevel();
 
-    if (frameCount % 3 == 0 && fire) {
+    if (frameCount % 3 == 0) {
       for (Pirate p : pirates) {
-        enemyBullets.add(p.shoot());
+        if (fire || captainSpawned && p.isCaptain) {
+          enemyBullets.add(p.shoot());
+        }
       }
     }
   }
@@ -113,7 +115,7 @@ class PlanetMode extends Scene {
 
     for (Pirate p : pirates) {
       for (Bullet b : ship.bullets) {
-        if (p.bounds.intersects(b.bounds)) {
+        if (p.isHit(b)) {
           destroyedBullets.add(b);
           p.takeDamage();
           game.points++;

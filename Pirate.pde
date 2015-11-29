@@ -2,7 +2,11 @@ class Pirate {
 
   PImage sprite;
   PVector velocity;
-  Shape bounds;
+  Rectangle bounds;
+  
+  // Captain has a circular shield. Use ellipse for collision detection.
+  Ellipse2D captainsBounds;
+  
   int health = 100;
 
   // Captain is bigger and stronger
@@ -16,21 +20,26 @@ class Pirate {
 
     if (isCaptain) {
       sprite = pirateCaptain.copy();
-      health = 500;
+      health = 1000;
     }
 
     float ratio = 0.6;
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
-    
+  }
+  
+  boolean isHit(Bullet b) {
     if (isCaptain) {
-      bounds = new Ellipse2D.Float((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
+      return new Ellipse2D.Double(bounds.x, bounds.y, bounds.width, bounds.height).intersects(b.bounds);
+    }
+    else {
+      return bounds.intersects(b.bounds);
     }
   }
 
   Bullet shoot() {
-    int y = bounds.getBounds().y + bounds.getBounds().height;
-    PVector pos = new PVector((int)bounds.getBounds().getCenterX(), y);
+    int y = bounds.y + bounds.height;
+    PVector pos = new PVector((int)bounds.getCenterX(), y);
     return new Bullet(pos, new PVector(0, -5));
   }
 
@@ -51,11 +60,11 @@ class Pirate {
   boolean reachedScreen = false;
   // Use target to update velocity.
   void integrate(PVector target) {
-    bounds.getBounds().x += velocity.x; 
-    bounds.getBounds().y -= velocity.y; 
+    bounds.x += velocity.x; 
+    bounds.y -= velocity.y; 
 
     // Travel down to a certain y
-    boolean offScreen = bounds.getBounds().y < 2 * sprite.height;
+    boolean offScreen = bounds.y < 2 * sprite.height;
     if (!reachedScreen) {
       if (offScreen) {
         velocity.y = -1;
@@ -76,12 +85,12 @@ class Pirate {
     yoff = yoff + .01;
 
     // Aim x velocity towards target
-    PVector position = new PVector((float)bounds.getBounds().getCenterX(), (float)bounds.getBounds().getCenterY());
+    PVector position = new PVector((float)bounds.getCenterX(), (float)bounds.getCenterY());
     float a = atan((position.x - target.x) / -Math.abs((position.y - target.y)));  
     velocity.x = noise(xoff) * (a*5);
 
     // If ship if fully on screen
-    if (reachedScreen) { 
+    if (reachedScreen) {
       // If too high or too low on screen, change direction.
       if (position.y < height *.2) {
         forwards = true;
@@ -106,6 +115,6 @@ class Pirate {
     integrate(target);
 
     imageMode(CORNER);
-    image(sprite, bounds.getBounds().x, bounds.getBounds().y);
+    image(sprite, bounds.x, bounds.y);
   }
 }
