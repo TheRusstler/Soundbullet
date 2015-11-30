@@ -1,26 +1,123 @@
 class HomePlanet extends Scene {
 
   StatusBar statusBar;
-  
+  final int DUAL_GUNS_UPGRADE_PRICE = 10000;
+
   ArrayList<Button> buttons = new ArrayList<Button>();
-  int buttonWidth = 300, buttonHeight = 60;
+  Button dualGunsUpgradeButton;
+
   Planet planet;
 
   public HomePlanet(Planet planet) {
     this.planet = planet;
     this.statusBar = new StatusBar();
+    createButtons();
+  }
 
-    buttons.add(new Button("REPAIR SHIP", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2, buttonWidth, buttonHeight), 
+  void goBack() {
+    setScene(universe, false);
+  }
+
+  int shipRepairCost() {
+    return (100 - game.health)*10;
+  }
+
+  boolean canAffordShipRepair() {
+    return game.points >= shipRepairCost();
+  }
+
+  void repairShip() {
+    if (canAffordShipRepair()) {
+      game.points -= shipRepairCost();
+      game.health = 100;
+    }
+  }
+
+  void getDualGunsUpgrade() {
+    if (game.points >= DUAL_GUNS_UPGRADE_PRICE && game.dualGunsUpgrade == false) {
+      game.points -= DUAL_GUNS_UPGRADE_PRICE;
+      game.dualGunsUpgrade = true;
+    }
+  }
+
+  void paint() {
+    planet.paint();
+    statusBar.paint();
+    paintShop();
+
+    for (Button b : buttons) {
+      b.paint();
+    }
+
+    if (game.dualGunsUpgrade) {
+      dualGunsUpgradeButton.title = "Owned";
+    }
+    dualGunsUpgradeButton.paint();
+  }
+
+  int SHOP_X = width/2 - 100, SHOP_Y = height/2 - 200, SHOP_WIDTH = 400, SHOP_HEIGHT = 400;
+  int shopButtonWidth = 100, shopButtonHeight = 30;
+
+  void paintShop() {
+
+    // Background / border
+    fill(102, 0, 204, 40);
+    stroke(102, 0, 204);
+    strokeWeight(2);
+    rect(SHOP_X, SHOP_Y, SHOP_WIDTH, SHOP_HEIGHT);
+    line(SHOP_X, SHOP_Y + 50, SHOP_X + SHOP_WIDTH, SHOP_Y + 50);
+
+    fill(255);
+
+    // Title
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text("WORKSHOP", SHOP_X + SHOP_WIDTH/2, SHOP_Y + 22);
+
+    // Upgrades
+    textSize(16);
+    itemName("SHIP REPAIR:", 80);
+    itemPrice(shipRepairCost(), 80);
+
+    itemName("DUAL TURRETS:", 140);
+    itemPrice(10000, 140);
+  }
+
+  void itemName(String name, float y) {
+    textAlign(LEFT, CENTER);
+    text(name, SHOP_X + 15, SHOP_Y + y);
+  }
+
+  void itemPrice(int price, float y) {
+    textAlign(RIGHT, CENTER);
+    text(price + " points", SHOP_X + SHOP_WIDTH - shopButtonWidth - 40, SHOP_Y + y);
+  }
+
+  void createButtons() {
+    buttons.add(new Button("BUY", 
+      new Rectangle(SHOP_X + SHOP_WIDTH - shopButtonWidth - 20, SHOP_Y + 80 - shopButtonHeight/2, shopButtonWidth, shopButtonHeight), 
       new Runnable() {
       public void run() {
         repairShip();
       }
     }
-    ));
+    , 
+      14
+      ));
+
+    dualGunsUpgradeButton = new Button("BUY", 
+      new Rectangle(SHOP_X + SHOP_WIDTH - shopButtonWidth - 20, SHOP_Y + 140 - shopButtonHeight/2, shopButtonWidth, shopButtonHeight), 
+      new Runnable() {
+      public void run() {
+        getDualGunsUpgrade();
+      }
+    }
+    , 
+      14
+      );
 
     buttons.add(new Button("BACK", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +80, buttonWidth, buttonHeight), 
+      new Rectangle(SHOP_X, SHOP_Y + SHOP_HEIGHT + 20, SHOP_WIDTH, 60), 
       new Runnable() {
       public void run() {
         goBack();
@@ -28,43 +125,21 @@ class HomePlanet extends Scene {
     }
     ));
   }
-  
-  void goBack() {
-    setScene(universe, false);
-  }
-  
-  int shipRepairCost() {
-    return (100 - game.health)*10;
-  }
-  
-  boolean canAffordShipRepair() {
-    return game.points > shipRepairCost();
-  }
-  
-  void repairShip() {
-    if(canAffordShipRepair()) {
-        game.points -= shipRepairCost();
-        game.health = 100;
-    }
-  }
 
-  void paint() {
-    planet.paint();
-    statusBar.paint();
-
+  void setupText() {
     fill(255);
-    textAlign(CENTER);
-    text("Ship health: " + game.health + "%", width/2, height/2 - 150);
-    text("Ship repair cost: " + shipRepairCost() + " points", width/2, height/2 - 100);
-    for (Button b : buttons) {
-      b.paint();
-    }
+    textSize(16);
+    textAlign(LEFT, CENTER);
   }
 
   void onClick() {
     statusBar.onClick();
     for (Button b : buttons) {
       b.onClick();
+    }
+
+    if (!game.dualGunsUpgrade) {
+      dualGunsUpgradeButton.onClick();
     }
   }
 }
