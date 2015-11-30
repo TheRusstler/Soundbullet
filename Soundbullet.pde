@@ -1,12 +1,14 @@
 import java.awt.geom.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import ddf.minim.*;
 import java.awt.geom.RectangularShape;
 
 final String SAVE_FILE = "data/save.json";
 final String HOME_PLANET = "Home.mp3";
 final String UNIVERSE_MUSIC = "Un nouveau soleil.mp3";
+final int NUMBER_OF_PLANETS = 7;
 
 Minim minim;
 AudioPlayer universeMusic;
@@ -44,14 +46,13 @@ void loadResources() {
   pirate          = loadImage("resources/ships/pirate.png");
   pirateCaptain   = loadImage("resources/ships/captainShield.png");
   shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
-}
+}    
 
 void loadMusic() {
   File folder = new File(dataPath("") + "/music");
-  System.out.println(folder.getAbsolutePath());
 
-  // Universe music
-  universeMusic = minim.loadFile("sounds/" + UNIVERSE_MUSIC); //<>//
+  // Universe music //<>//
+  universeMusic = minim.loadFile("sounds/" + UNIVERSE_MUSIC);
 
   // Home planet
   music.add(new Song(HOME_PLANET, null));

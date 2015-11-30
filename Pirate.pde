@@ -109,7 +109,6 @@ class Pirate {
     }
 
     fill(255);
-    textMode(LEFT);
   }
 
   void paint(PVector target) {

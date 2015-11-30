@@ -4,6 +4,7 @@ class PlanetMode extends Scene {
   Ship ship;
 
   final int BACKGROUND_SCROLL_SPEED = 2;
+  
   ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>(); 
   HUD headsUpDisplay;

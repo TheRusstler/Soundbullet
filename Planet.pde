@@ -7,13 +7,21 @@ class Planet extends Scene {
   int r, g, b;
   Song song;
   String description;
+  boolean isConquered = false;
 
   Ellipse2D bounds;
 
-  public Planet(int x, int y, Song song, String description) {
+  public Planet(int x, int y, String description, int index) {
     this.position =  new PVector(x, y);
-    this.song = song;
+    this.song = music.get(index);
     this.description = description;
+
+    // Home planet
+    if (index == 0) { 
+      this.isConquered = true;
+    } else {
+      this.isConquered = game.planetsConquered[index-1];
+    }
 
     if (random(0, 1) > 0.5) {
       type = planetType1.copy();

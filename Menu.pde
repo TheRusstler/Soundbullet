@@ -47,7 +47,9 @@ public class Menu extends Scene {
       result = new Game(
         json.getString("player"), 
         json.getInt("health"),
-        json.getInt("points"));
+        json.getInt("points"),
+        json.getBoolean("dualGunsUpgrade"),
+        json.getJSONArray("planets"));
     }
 
     return result;

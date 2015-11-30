@@ -8,19 +8,14 @@ class Universe extends Scene {
      statusBar = new StatusBar();
      visibleTree.add(statusBar);
 
-    // TODO: Be more creative :3
-    addPlanet(new Planet(200, 250, music.get(0), "There's no place like it.\nTravel here for ship repairs and upgrades."));
-    addPlanet(new Planet(300, 490, music.get(1), "A dangerous planet"));
-    addPlanet(new Planet(210, 670, music.get(2), "Just before sunrise, the sky turns a warm shade of violet here"));
-    addPlanet(new Planet(850, 210, music.get(3), "Rumour has it, infant Zeus was hidden and raised here"));
-    addPlanet(new Planet(900, 430, music.get(4), "Once described as \"The most unintresting planet ever visited\""));
-    addPlanet(new Planet(820, 630, music.get(5), "A cold place"));
-    addPlanet(new Planet(600, 350, music.get(6), "Seven ships have vanished here"));
-    addPlanet(new Planet(560, 610, music.get(7), ""));
-    
-    //addPlanet(new Planet(560, 610, music.get(7), ""));
-    //addPlanet(new Planet(560, 610, music.get(7), ""));
-    //addPlanet(new Planet(560, 610, music.get(7), ""));
+    addPlanet(new Planet(200, 250, "There's no place like it.\nTravel here for ship repairs and upgrades.", 0));
+    addPlanet(new Planet(300, 490, "A dangerous planet", 1));
+    addPlanet(new Planet(210, 670, "Just before sunrise, the sky turns a warm shade of violet here", 2));
+    addPlanet(new Planet(850, 210, "Rumour has it, infant Zeus was hidden and raised here", 3));
+    addPlanet(new Planet(900, 430, "Once described as \"The most unintresting planet ever visited\"", 4));
+    addPlanet(new Planet(820, 630, "A cold place", 5));
+    addPlanet(new Planet(600, 350, "Seven ships have vanished here", 6));
+    addPlanet(new Planet(560, 610, "", 7));
     
     universeMusic.play();
     universeMusic.loop();

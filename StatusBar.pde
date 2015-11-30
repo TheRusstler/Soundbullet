@@ -21,7 +21,6 @@ class StatusBar extends Scene {
     
     menu.paint();
     
-    
     textAlign(CENTER, TOP);
     textSize(16);
     fill(255);
