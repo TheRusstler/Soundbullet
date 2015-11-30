@@ -6,8 +6,10 @@ import java.awt.geom.RectangularShape;
 
 final String SAVE_FILE = "data/save.json";
 final String HOME_PLANET = "Home.mp3";
+final String UNIVERSE_MUSIC = "Un nouveau soleil.mp3";
 
 Minim minim;
+AudioPlayer universeMusic;
 
 PImage logoLarge, planetType1, planetType2, surface;
 PImage ship, shipDualGuns;
@@ -47,6 +49,9 @@ void loadResources() {
 void loadMusic() {
   File folder = new File(dataPath("") + "/music");
   System.out.println(folder.getAbsolutePath());
+  
+  // Universe music
+  universeMusic = minim.loadFile("sounds/" + UNIVERSE_MUSIC); //<>//
   
   // Home planet
   music.add(new Song(HOME_PLANET, null));

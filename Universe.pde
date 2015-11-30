@@ -24,6 +24,9 @@ class Universe extends Scene {
     addPlanet(new Planet(820, 630, music.get(5), "A cold place"));
     addPlanet(new Planet(600, 350, music.get(6), "Seven ships have vanished here"));
     addPlanet(new Planet(560, 610, music.get(7), ""));
+    
+    universeMusic.play();
+    universeMusic.loop();
   }
 
   void addPlanet(Planet planet) {

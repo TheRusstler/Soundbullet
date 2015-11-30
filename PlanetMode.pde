@@ -22,6 +22,7 @@ class PlanetMode extends Scene {
     showStars = false;
     noCursor();
 
+    universeMusic.pause();
     planet.song.track.cue(1000 * 270);
     planet.song.track.play();
   }
@@ -201,6 +202,7 @@ class PlanetMode extends Scene {
   void returnToUniverse() {
     planet.song.track.pause();
     planet.song.track.rewind();
+    universeMusic.play();
 
     setScene(universe, false); 
     showStars = true;

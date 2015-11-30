@@ -6,8 +6,10 @@ class HUD extends Scene {
 
   void paint() {
     fill(255);
-    text("Health: " + game.health, 50, 50);
-    text("Points: " + game.points, 50, 150);
+    textSize(16);
+    textAlign(LEFT);
+    text("Health: " + game.health + "%", 50, 50);
+    text("Points: " + game.points, 50, 100);
   }
   
   void onClick() {}

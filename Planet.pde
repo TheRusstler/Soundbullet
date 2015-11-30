@@ -83,7 +83,7 @@ class Planet extends Scene {
   public void onClick() {
     if (bounds.contains(mouseX, mouseY)) {
       if (song.name == HOME_PLANET) {
-        setScene(new HomePlanet(), false);
+        setScene(new HomePlanet(this), false);
       } else {
         setScene(new PlanetMode(this), false);
       }
