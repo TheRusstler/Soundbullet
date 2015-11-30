@@ -197,6 +197,7 @@ class PlanetMode extends Scene {
   }
   
   void win() {
+    game.planetsConquered[planet.index-1] = true;
     returnToUniverse();
   }
 

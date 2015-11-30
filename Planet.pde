@@ -1,5 +1,6 @@
 class Planet extends Scene {
 
+  int index;
   PImage type;
   float rotation;
   PVector position;
@@ -7,7 +8,6 @@ class Planet extends Scene {
   int r, g, b;
   Song song;
   String description;
-  boolean isConquered = false;
 
   Ellipse2D bounds;
 
@@ -15,13 +15,7 @@ class Planet extends Scene {
     this.position =  new PVector(x, y);
     this.song = music.get(index);
     this.description = description;
-
-    // Home planet
-    if (index == 0) { 
-      this.isConquered = true;
-    } else {
-      this.isConquered = game.planetsConquered[index-1];
-    }
+    this.index = index;
 
     if (random(0, 1) > 0.5) {
       type = planetType1.copy();
@@ -57,6 +51,15 @@ class Planet extends Scene {
       fill(255, 30);
       ellipseMode(CENTER);
       ellipse(0, 0, diameter*0.85, diameter*0.85);
+    }
+
+    // Ownership
+    stroke(0, 255, 0);
+    strokeWeight(2);
+    noFill();
+    ellipseMode(CENTER);
+    if (index == 0 || game.planetsConquered[index-1]) {
+      ellipse(0, 0, diameter*0.9, diameter*0.9);
     }
 
     rotate(-rotation);
