@@ -179,10 +179,7 @@ class PlanetMode extends Scene {
     noTint();
   }
 
-
-  void onClick() {
-    returnToUniverse();
-  }
+  void onClick() {}
 
   void onKeyPressed() {
     ship.onKeyPressed();
@@ -194,19 +191,19 @@ class PlanetMode extends Scene {
 
   void lose() {
     returnToUniverse();
+    setScene(new Notification("0% health. You escape.", false, universe), false);
   }
   
   void win() {
     game.planetsConquered[planet.index-1] = true;
     returnToUniverse();
+    setScene(new Notification("Planet conquered!", true, universe), false);
   }
 
   void returnToUniverse() {
     planet.song.track.pause();
     planet.song.track.rewind();
     universeMusic.play();
-
-    setScene(universe, false); 
     showStars = true;
     cursor();
   }
