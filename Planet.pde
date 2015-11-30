@@ -54,11 +54,11 @@ class Planet extends Scene {
     }
 
     // Ownership
-    stroke(0, 255, 0);
-    strokeWeight(2);
-    noFill();
-    ellipseMode(CENTER);
     if (index == 0 || game.planetsConquered[index-1]) {
+      stroke(0, 150, 0);
+      strokeWeight(2);
+      noFill();
+      ellipseMode(CENTER);
       ellipse(0, 0, diameter*0.9, diameter*0.9);
     }
 
