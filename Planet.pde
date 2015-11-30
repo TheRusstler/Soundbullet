@@ -59,9 +59,9 @@ class Planet extends Scene {
   final int PLANET_WINDOW_WIDTH = 200, PLANET_WINDOW_HEIGHT = 150, PLANET_WINDOW_PADDING = 15;
 
   private void mouseOverWindow() {
-    stroke(0, 53, 204);
+    stroke(102, 0, 204);
     strokeWeight(2);
-    fill(0, 20, 77, 150);
+    fill(102, 0, 204, 80);
 
     rect(mouseX, mouseY, PLANET_WINDOW_WIDTH, PLANET_WINDOW_HEIGHT, 5);
 

@@ -1,11 +1,14 @@
 class HomePlanet extends Scene {
 
+  StatusBar statusBar;
+  
   ArrayList<Button> buttons = new ArrayList<Button>();
   int buttonWidth = 300, buttonHeight = 60;
   Planet planet;
 
   public HomePlanet(Planet planet) {
     this.planet = planet;
+    this.statusBar = new StatusBar();
 
     buttons.add(new Button("REPAIR SHIP", 
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2, buttonWidth, buttonHeight), 
@@ -17,7 +20,7 @@ class HomePlanet extends Scene {
     ));
 
     buttons.add(new Button("BACK", 
-      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +100, buttonWidth, buttonHeight), 
+      new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +80, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
         goBack();
@@ -47,6 +50,7 @@ class HomePlanet extends Scene {
 
   void paint() {
     planet.paint();
+    statusBar.paint();
 
     fill(255);
     textAlign(CENTER);
@@ -58,6 +62,7 @@ class HomePlanet extends Scene {
   }
 
   void onClick() {
+    statusBar.onClick();
     for (Button b : buttons) {
       b.onClick();
     }

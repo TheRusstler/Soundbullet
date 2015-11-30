@@ -25,11 +25,11 @@ Universe universe;
 Game game = null;
 
 void setup() {
-  fullScreen();
-  //size(800, 600);
+  //fullScreen();
+  size(1200, 800);
   imageMode(CENTER); 
   minim = new Minim(this);
-  
+
   loadResources();
   loadMusic();
   setScene(new Menu(), true);
@@ -49,15 +49,15 @@ void loadResources() {
 void loadMusic() {
   File folder = new File(dataPath("") + "/music");
   System.out.println(folder.getAbsolutePath());
-  
+
   // Universe music
   universeMusic = minim.loadFile("sounds/" + UNIVERSE_MUSIC); //<>//
-  
+
   // Home planet
   music.add(new Song(HOME_PLANET, null));
-  
-  for(File file : folder.listFiles()) { //<>//
-    if(file.getName().endsWith(".mp3")) {
+
+  for (File file : folder.listFiles()) {
+    if (file.getName().endsWith(".mp3")) {
       music.add(new Song(file.getName(), minim.loadFile("music/" + file.getName())));
     }
   }
@@ -79,6 +79,11 @@ void setScene(Scene scene, boolean refreshStars) {
 
 void menuLogo() {
   image(logoLarge, logoLarge.width/2, logoLarge.height/2);
+}
+
+void saveAndExit() {
+  game.save();
+  setScene(new Menu(), false);
 }
 
 void draw() {
