@@ -5,6 +5,7 @@ import ddf.minim.*;
 import java.awt.geom.RectangularShape;
 
 final String SAVE_FILE = "data/save.json";
+final String HOME_PLANET = "Home.mp3";
 
 Minim minim;
 
@@ -46,6 +47,9 @@ void loadResources() {
 void loadMusic() {
   File folder = new File(dataPath("") + "/music");
   System.out.println(folder.getAbsolutePath());
+  
+  // Home planet
+  music.add(new Song(HOME_PLANET, null));
   
   for(File file : folder.listFiles()) { //<>//
     if(file.getName().endsWith(".mp3")) {

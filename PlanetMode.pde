@@ -15,6 +15,7 @@ class PlanetMode extends Scene {
 
   public PlanetMode(Planet planet) {
     this.planet = planet;
+    
     this.ship = new Ship();
     this.headsUpDisplay = new HUD();
 
@@ -23,10 +24,6 @@ class PlanetMode extends Scene {
 
     planet.song.track.cue(1000 * 270);
     planet.song.track.play();
-  }
-
-  public void exitPlanetMode() {
-    showStars = true;
   }
 
   void managePirates() {

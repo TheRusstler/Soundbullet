@@ -35,18 +35,18 @@ class Planet extends Scene {
   public void paint() {
     imageMode(CENTER);
     rectMode(CORNER);
-    
+
     tint(r, g, b);
 
     translate(position.x, position.y);
     rotate(rotation);
 
     image(type, 0, 0);
-    
+
     noStroke();
 
     if (bounds.contains(mouseX, mouseY)) {
-      fill(255,30);
+      fill(255, 30);
       ellipseMode(CENTER);
       ellipse(0, 0, diameter*0.85, diameter*0.85);
     }
@@ -55,34 +55,38 @@ class Planet extends Scene {
     translate(-position.x, -position.y);
     noTint();
   }
-  
+
   final int PLANET_WINDOW_WIDTH = 200, PLANET_WINDOW_HEIGHT = 150, PLANET_WINDOW_PADDING = 15;
-  
+
   private void mouseOverWindow() {
     stroke(0, 53, 204);
     strokeWeight(2);
     fill(0, 20, 77, 150);
-    
+
     rect(mouseX, mouseY, PLANET_WINDOW_WIDTH, PLANET_WINDOW_HEIGHT, 5);
-    
+
     textSize(12);
     textAlign(LEFT, TOP);
     fill(255);
-    text(song.name.substring(0,song.name.length() - 4) + "\n\n" + description, 
-      mouseX + PLANET_WINDOW_PADDING,
+    text(song.name.substring(0, song.name.length() - 4) + "\n\n" + description, 
+      mouseX + PLANET_WINDOW_PADDING, 
       mouseY + PLANET_WINDOW_PADDING, 
-      PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2,
+      PLANET_WINDOW_WIDTH - PLANET_WINDOW_PADDING * 2, 
       PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING * 2);
-      
-      textAlign(CENTER, CENTER);
-      text("CLICK TO TRAVEL!", 
-        mouseX + (PLANET_WINDOW_WIDTH + PLANET_WINDOW_PADDING)/2, 
-        mouseY + PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING - 5);
+
+    textAlign(CENTER, CENTER);
+    text("CLICK TO TRAVEL!", 
+      mouseX + (PLANET_WINDOW_WIDTH + PLANET_WINDOW_PADDING)/2, 
+      mouseY + PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING - 5);
   }
 
   public void onClick() {
     if (bounds.contains(mouseX, mouseY)) {
-      setScene(new PlanetMode(this), false);
-    } 
+      if (song.name == HOME_PLANET) {
+        setScene(new HomePlanet(), false);
+      } else {
+        setScene(new PlanetMode(this), false);
+      }
+    }
   }
 }
