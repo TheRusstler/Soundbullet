@@ -56,4 +56,17 @@ class Game {
 
     saveJSONObject(json, SAVE_FILE);
   }
+  
+  boolean isWon() {
+    boolean won = true;
+    
+    for(boolean planet : planetsConquered) {
+      if (!planet) {
+        won = false;
+        break;
+      }
+    }
+    
+    return won;
+  }
 }

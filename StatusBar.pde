@@ -29,7 +29,14 @@ class StatusBar extends Scene {
     fill(255);
     
     text(String.format("%s POINTS", game.points), width/4, 10);
-    text(String.format("CAPTAIN %s", game.player), width/2, 10);
+    
+    if(!game.isWon()) {
+      text(String.format("CAPTAIN %s", game.player), width/2, 10);
+    }
+    else {
+      text("YOU WIN!      GAME COMPLETED!", width/2, 10);
+    }
+    
     text(game.health + "% HEALTH", width * 3/4, 10);
   }
 
