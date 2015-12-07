@@ -1,3 +1,6 @@
+/*
+ * Gets a captain's name for a new game
+ */
 class NewGame extends Scene {
 
   String name = "";
@@ -41,6 +44,9 @@ class NewGame extends Scene {
     back.onClick();
   }
 
+  /*
+   * Draw the text box
+   */
   void textbox() {
     if (textBoxBorder.contains(mouseX, mouseY)) {
       fill(255, 60);
@@ -58,6 +64,9 @@ class NewGame extends Scene {
     text(name, (float)textBoxBorder.getCenterX()-2, (float)textBoxBorder.getCenterY()-2);
   }
 
+  /*
+   * Draw the text box label
+   */
   void textboxLabel() {
     textSize(20);
     textAlign(LEFT, CENTER);
@@ -65,6 +74,9 @@ class NewGame extends Scene {
     text("WHAT'S YOUR NAME, CAPTAIN?", width/2 - textBoxWidth/2, height/2 +10);
   }
 
+  /*
+   * Gets key input and adds it to the textbox
+   */
   void onKeyPressed() {
     char ch = key;
     if (Character.isLetter(ch) || Character.isDigit(ch) || ch == ' ') {
@@ -77,6 +89,9 @@ class NewGame extends Scene {
     }
   }
 
+  /*
+   * Starts the new game
+   */
   void submit() {
     if (name != null && !name.isEmpty()) {
       game = new Game(this.name);

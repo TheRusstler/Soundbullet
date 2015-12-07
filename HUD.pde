@@ -1,7 +1,7 @@
 /*
- * HUD is a display of a players current game status
+ * A Heads Up Display for planet-attack mode.
+ * Shows the players's points and health.
  */
-
 class HUD extends Scene {
 
   void paint() {

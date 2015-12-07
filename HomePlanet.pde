@@ -1,3 +1,6 @@
+/*
+ * Home planet / Workshop scene
+ */
 class HomePlanet extends Scene {
 
   StatusBar statusBar;
@@ -14,18 +17,30 @@ class HomePlanet extends Scene {
     createButtons();
   }
 
+  /*
+   * Returns to the universe
+   */
   void goBack() {
     setScene(universe, false);
   }
-
+  
+  /*
+   * Returns the cost of ship repair
+   */
   int shipRepairCost() {
     return (100 - game.health)*10;
   }
 
+  /*
+   * Returns true if the player has enough points to repair his/her ship.
+   */
   boolean canAffordShipRepair() {
     return game.points >= shipRepairCost();
   }
 
+  /*
+   * Repairs the ship to full health
+   */
   void repairShip() {
     if (canAffordShipRepair()) {
       game.points -= shipRepairCost();
@@ -33,6 +48,9 @@ class HomePlanet extends Scene {
     }
   }
 
+  /*
+   * Purchases the dual guns upgrade
+   */
   void getDualGunsUpgrade() {
     if (game.points >= DUAL_GUNS_UPGRADE_PRICE && game.dualGunsUpgrade == false) {
       game.points -= DUAL_GUNS_UPGRADE_PRICE;
@@ -58,6 +76,9 @@ class HomePlanet extends Scene {
   int SHOP_X = width/2 - 100, SHOP_Y = height/2 - 200, SHOP_WIDTH = 400, SHOP_HEIGHT = 400;
   int shopButtonWidth = 100, shopButtonHeight = 30;
 
+  /*
+   * Draws the workshop
+   */
   void paintShop() {
 
     // Background / border
@@ -83,16 +104,25 @@ class HomePlanet extends Scene {
     itemPrice(10000, 140);
   }
 
+  /*
+   * Draws item label
+   */
   void itemName(String name, float y) {
     textAlign(LEFT, CENTER);
     text(name, SHOP_X + 15, SHOP_Y + y);
   }
 
+  /*
+   * Draws item price
+   */
   void itemPrice(int price, float y) {
     textAlign(RIGHT, CENTER);
     text(price + " points", SHOP_X + SHOP_WIDTH - shopButtonWidth - 40, SHOP_Y + y);
   }
 
+  /*
+   * Draws item 'buy' buttons
+   */
   void createButtons() {
     buttons.add(new Button("BUY", 
       new Rectangle(SHOP_X + SHOP_WIDTH - shopButtonWidth - 20, SHOP_Y + 80 - shopButtonHeight/2, shopButtonWidth, shopButtonHeight), 
@@ -138,6 +168,7 @@ class HomePlanet extends Scene {
       b.onClick();
     }
 
+    // Only fire item upgrade click event if the upgrade has not already been purchased
     if (!game.dualGunsUpgrade) {
       dualGunsUpgradeButton.onClick();
     }

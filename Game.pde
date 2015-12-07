@@ -1,8 +1,18 @@
+/*
+ * Stores the current game state.
+ */
 class Game {
-
+  // Player's name and points
   String player;
-  int health = 100, points = 10;
+  int points = 10;
+
+  // Ship health
+  int health = 100;
+
+  // Upgrades purchased
   boolean dualGunsUpgrade = false;
+
+  // Empire
   boolean[] planetsConquered;
 
   public Game(String player) {
@@ -25,6 +35,9 @@ class Game {
     }
   }
 
+  /*
+   * Saves the game to a file.
+   */
   public void save() {
     JSONObject json = new JSONObject();
     json.setString("player", player);
@@ -37,10 +50,10 @@ class Game {
     for (int i =0; i<planetsConquered.length; i++) {
       planet = new JSONObject();
       planet.setBoolean("conquered", this.planetsConquered[i]);
-      array.setJSONObject(i ,planet);
+      array.setJSONObject(i, planet);
     }
     json.setJSONArray("planets", array);
-    
+
     saveJSONObject(json, SAVE_FILE);
   }
 }

@@ -1,3 +1,6 @@
+/*
+ * Main menu scene
+ */
 public class Menu extends Scene {
 
   ArrayList<Button> buttons = new ArrayList<Button>();
@@ -20,7 +23,7 @@ public class Menu extends Scene {
       new Rectangle(width/2 - buttonWidth/2, height/2 -buttonHeight/2 +130, buttonWidth, buttonHeight), 
       new Runnable() {
       public void run() {
-        if(game != null) {
+        if (game != null) {
           universe = new Universe();
           setScene(universe, true);
         }
@@ -38,6 +41,9 @@ public class Menu extends Scene {
     ));
   }
 
+  /*
+   * Loads the last save game.
+   */
   public Game loadGame() { 
     Game result = null;
 
@@ -46,9 +52,9 @@ public class Menu extends Scene {
       JSONObject json = loadJSONObject(dataPath("save.json"));
       result = new Game(
         json.getString("player"), 
-        json.getInt("health"),
-        json.getInt("points"),
-        json.getBoolean("dualGunsUpgrade"),
+        json.getInt("health"), 
+        json.getInt("points"), 
+        json.getBoolean("dualGunsUpgrade"), 
         json.getJSONArray("planets"));
     }
 

@@ -24,7 +24,7 @@ class PlanetMode extends Scene {
     noCursor();
 
     universeMusic.pause();
-    planet.song.track.cue(1000 * 270);
+    planet.song.track.cue(1000 * 180);
     planet.song.track.play();
   }
 

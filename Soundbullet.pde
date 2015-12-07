@@ -5,38 +5,49 @@ import java.util.Arrays;
 import ddf.minim.*;
 import java.awt.geom.RectangularShape;
 
+
+// ------ Constants ------
 final String SAVE_FILE = "data/save.json";
 final String HOME_PLANET = "Home.mp3";
 final String UNIVERSE_MUSIC = "Un nouveau soleil.mp3";
 final int NUMBER_OF_PLANETS = 7;
 
+
+// ------ Audio ------
 Minim minim;
 AudioPlayer universeMusic;
 
+
+// ------ Images ------
 PImage logoLarge, planetType1, planetType2, surface;
 PImage ship, shipDualGuns;
 PImage pirate, pirateCaptain;
 
 
+// ------ Game properties ------
+
+// Shimmering stars in the universe background
 ArrayList<Star> stars = new ArrayList<Star>();
+
+// Planet songs
 ArrayList<Song> music = new ArrayList<Song>();
+
+// Set to false when stars are not required (e.g. Planet-attack mode)
 boolean showStars = true;
 
+// The current scene
 Scene scene;
+
+// The current universe
 Universe universe;
+
+// the current game state
 Game game = null;
 
-void setup() {
-  //fullScreen();
-  size(1200, 800);
-  imageMode(CENTER); 
-  minim = new Minim(this);
 
-  loadResources();
-  loadMusic();
-  setScene(new Menu(), true);
-}
-
+/*
+ * Loads the game images
+ */
 void loadResources() {
   logoLarge       = loadImage("resources/logo/logo_large_transparent.png");
   planetType1     = loadImage("resources/planets/red.png");
@@ -48,6 +59,10 @@ void loadResources() {
   shipDualGuns    = loadImage("resources/ships/ship_upgraded.png");
 }    
 
+
+/*
+ * Loads the game audio
+ */
 void loadMusic() {
   File folder = new File(dataPath("") + "/music");
 
@@ -64,6 +79,7 @@ void loadMusic() {
   }
 }
 
+
 /*
  * Set scene navigates the main window to a given scene.
  */
@@ -78,20 +94,36 @@ void setScene(Scene scene, boolean refreshStars) {
   this.scene = scene;
 }
 
+
+/*
+ * Draws the logo on the menu screens
+ */
 void menuLogo() {
   image(logoLarge, logoLarge.width/2, logoLarge.height/2);
 }
 
+
+/*
+ * Saves and exits the game
+ */
 void saveAndExit() {
   game.save();
   setScene(new Menu(), false);
 }
 
+
+/*
+ * Draws the stars (if required), then the current scene
+ */
 void draw() {
   drawBackground();
   scene.paint();
 }
 
+
+/*
+ * Draws the stars
+ */
 void drawBackground() {
   background(0);
   noStroke();
@@ -104,6 +136,8 @@ void drawBackground() {
   }
 }
 
+
+// ------ Events ------
 void mouseReleased() {
   scene.onClick();
 }
@@ -114,4 +148,15 @@ void keyPressed() {
 
 void keyReleased() {
   scene.onKeyReleased();
+}
+
+void setup() {
+  fullScreen();
+  //size(1200, 800); 
+  imageMode(CENTER); 
+  minim = new Minim(this);
+
+  loadResources();
+  loadMusic();
+  setScene(new Menu(), true);
 }
