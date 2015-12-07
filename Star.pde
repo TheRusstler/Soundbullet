@@ -1,3 +1,6 @@
+/*
+ * A shimmering star in the universe
+ */
 class Star { 
   public final float x; 
   public final float y; 

@@ -1,3 +1,6 @@
+/*
+ * A planet in the universe.
+ */
 class Planet extends Scene {
 
   int index;
@@ -53,8 +56,17 @@ class Planet extends Scene {
       ellipse(0, 0, diameter*0.85, diameter*0.85);
     }
 
-    // Ownership
-    if (index == 0 || game.planetsConquered[index-1]) {
+    // Home planet = blue ring
+    if (index == 0) {
+      stroke(0, 0, 150);
+      strokeWeight(2);
+      noFill();
+      ellipseMode(CENTER);
+      ellipse(0, 0, diameter*0.9, diameter*0.9);
+    }
+
+    // Conquered planet = green ring.
+    else if (index == 0 || game.planetsConquered[index-1]) {
       stroke(0, 150, 0);
       strokeWeight(2);
       noFill();
@@ -69,7 +81,10 @@ class Planet extends Scene {
 
   final int PLANET_WINDOW_WIDTH = 200, PLANET_WINDOW_HEIGHT = 150, PLANET_WINDOW_PADDING = 15;
 
-  private void mouseOverWindow() {
+  /*
+   * Info window which appears on hover of a planet
+   */
+  void mouseOverWindow() {
     stroke(102, 0, 204);
     strokeWeight(2);
     fill(102, 0, 204, 80);
@@ -91,6 +106,9 @@ class Planet extends Scene {
       mouseY + PLANET_WINDOW_HEIGHT - PLANET_WINDOW_PADDING - 5);
   }
 
+  /*
+   * Navigate to a planet on click
+   */
   public void onClick() {
     if (bounds.contains(mouseX, mouseY)) {
       if (song.name == HOME_PLANET) {

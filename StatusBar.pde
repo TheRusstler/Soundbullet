@@ -1,3 +1,6 @@
+/*
+ * Bar at the top of the screen in universe mode.
+ */
 class StatusBar extends Scene {
 
   Button menu;

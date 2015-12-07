@@ -1,12 +1,15 @@
+/*
+ * A pirate is an enemy ship.
+ */
 class Pirate {
 
   PImage sprite;
   PVector velocity;
   Rectangle bounds;
-  
+
   // Captain has a circular shield. Use ellipse for collision detection.
   Ellipse2D captainsBounds;
-  
+
   int health = 100;
 
   // Captain is bigger and stronger
@@ -27,22 +30,30 @@ class Pirate {
     sprite.resize((int)(sprite.width * ratio), (int)(sprite.height * ratio));
     bounds = new Rectangle((int)xPosition - sprite.width/2, (int)-sprite.height, sprite.width, sprite.height);
   }
-  
+
+  /*
+   * Bullet hit detection
+   */
   boolean isHit(Bullet b) {
     if (isCaptain) {
       return new Ellipse2D.Double(bounds.x, bounds.y, bounds.width, bounds.height).intersects(b.bounds);
-    }
-    else {
+    } else {
       return bounds.intersects(b.bounds);
     }
   }
 
+  /*
+   * Fire bullets
+   */
   Bullet shoot() {
     int y = bounds.y + bounds.height;
     PVector pos = new PVector((int)bounds.getCenterX(), y);
     return new Bullet(pos, new PVector(0, -5));
   }
 
+  /*
+   * Take damage from a bullet
+   */
   void takeDamage() {
 
     // Captains take less damage
@@ -53,14 +64,21 @@ class Pirate {
     }
   }
 
+  /*
+   * Returns true if this ship is destroyed 
+   */
   boolean isDestroyed() {
     return health <= 0;
   }
 
   boolean reachedScreen = false;
-  // Use target to update velocity.
+
+
+  /*
+   * Update current velocity according to the target (player's ship)
+   */
   void integrate(PVector target) {
-    
+
     bounds.x += velocity.x; 
     bounds.y -= velocity.y; 
 
@@ -81,6 +99,10 @@ class Pirate {
   float xoff = 0.0;
   float yoff = 0.0;
   boolean forwards = true;
+
+  /*
+   * Navigates the AI towards the player's ship, with some randomness added to make it easier.
+   */
   void navigate(PVector target) {
     xoff = xoff + .05; // Noisy motion, increase for more
     yoff = yoff + .01;

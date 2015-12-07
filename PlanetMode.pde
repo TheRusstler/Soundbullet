@@ -1,10 +1,13 @@
+/*
+ * Planet-attack mode.
+ */
 class PlanetMode extends Scene {
 
   Planet planet;
   Ship ship;
 
   final int BACKGROUND_SCROLL_SPEED = 2;
-  
+
   ArrayList<Pirate> pirates = new ArrayList<Pirate>(); 
   ArrayList<Bullet> enemyBullets = new ArrayList<Bullet>(); 
   HUD headsUpDisplay;
@@ -16,7 +19,7 @@ class PlanetMode extends Scene {
 
   public PlanetMode(Planet planet) {
     this.planet = planet;
-    
+
     this.ship = new Ship();
     this.headsUpDisplay = new HUD();
 
@@ -36,6 +39,9 @@ class PlanetMode extends Scene {
     spawnPirates();
   }
 
+  /*
+   * Spawns pirates. Max 5.
+   */
   void spawnPirates() {
     if (!captainSpawned) {
 
@@ -57,10 +63,16 @@ class PlanetMode extends Scene {
     }
   }
 
+  /*
+   * Get the current amplitude of the music
+   */
   double getAudioMixLevel() {
     return planet.song.track.mix.level()*1000;
   }
 
+  /*
+   * Make enemies fire bullets
+   */
   void enemyAttack() {
     fireRate = getAudioMixLevel();
     boolean fire = random(50, 300) < (float)getAudioMixLevel();
@@ -74,6 +86,9 @@ class PlanetMode extends Scene {
     }
   }
 
+  /*
+   * Clean up destroyed or off screen bullets
+   */
   void removeSpentBullets() {
     ArrayList<Bullet> destroyedBullets = new ArrayList();
 
@@ -88,6 +103,9 @@ class PlanetMode extends Scene {
     }
   }
 
+  /*
+   * Cause ship damage by enemy bullets
+   */
   void detectEnemyBulletCollisions() {
     ArrayList<Bullet> destroyedBullets = new ArrayList();
 
@@ -108,6 +126,9 @@ class PlanetMode extends Scene {
     }
   }
 
+  /*
+   * Cause damage to pirates with friendly bullets
+   */
   void detectFriendlyBulletCollisions() {
     ArrayList<Bullet> destroyedBullets = new ArrayList();
     ArrayList<Pirate> destroyedPirates = new ArrayList();
@@ -158,6 +179,9 @@ class PlanetMode extends Scene {
     }
   }
 
+  /*
+   * Infinite scrolling background
+   */
   void paintBackground() {
     imageMode(CORNER);
     fill(0);
@@ -193,7 +217,7 @@ class PlanetMode extends Scene {
     returnToUniverse();
     setScene(new Notification("0% health. You escape.", false, universe), false);
   }
-  
+
   void win() {
     game.planetsConquered[planet.index-1] = true;
     returnToUniverse();

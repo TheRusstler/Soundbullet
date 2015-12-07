@@ -1,3 +1,6 @@
+/*
+ * The player's ship
+ */
 class Ship extends Scene {
   boolean left, right, up, down, space;
   int sensitivity = 8;
@@ -8,7 +11,7 @@ class Ship extends Scene {
 
   final int DUAL_GUNS_SPACING = 12, BULLET_Y_OFFSET = 10;
 
-  public Ship() {
+  public Ship() { 
     sprite = ship.copy();
 
     // Check for upgrades
@@ -30,15 +33,13 @@ class Ship extends Scene {
       b.paint();
     }
 
-    // Debug to see ship bounds.
-    //rectMode(CORNER);
-    //fill(255, 255, 255, 50);
-    //rect((float)bounds.x, (float)bounds.y, (float)bounds.width, (float)bounds.height);
-
-    imageMode(CORNER);
+    imageMode(CORNER); 
     image(sprite, bounds.x, bounds.y);
   }
 
+  /*
+   * Clean up bullets which have left the screen
+   */
   void removeSpentBullets() {
     ArrayList<Bullet> destroyedBullets = new ArrayList();
 
@@ -85,26 +86,30 @@ class Ship extends Scene {
     onKeyAction(false);
   }
 
+  /*
+   * Fire guns
+   */
   void shoot() {
 
     int y = bounds.y + BULLET_Y_OFFSET;
-    Bullet b;
     PVector vel = new PVector(0, 15);
     PVector pos;
     if (game.dualGunsUpgrade) {
-      
+
       pos = new PVector((int)bounds.getCenterX()-DUAL_GUNS_SPACING, y);
-      bullets.add(createBullet(pos,vel));
-      
+      bullets.add(createBullet(pos, vel));
+
       pos = new PVector((int)bounds.getCenterX()+DUAL_GUNS_SPACING, y);
-      bullets.add(createBullet(pos,vel));
-      
+      bullets.add(createBullet(pos, vel));
     } else {
       pos = new PVector((int)bounds.getCenterX(), y);
-      bullets.add(createBullet(pos,vel));
+      bullets.add(createBullet(pos, vel));
     }
   }
-  
+
+  /*
+   * Create a new bullet
+   */
   Bullet createBullet(PVector pos, PVector vel) {
     Bullet result = new Bullet(pos, vel);
     result.r = 0;
@@ -113,10 +118,16 @@ class Ship extends Scene {
     return result;
   }
 
+  /*
+   * Take enemy damage
+   */
   void takeDamage() {
     game.health --;
   }
 
+  /*
+   * Detect key presses from key down/up events.
+   */
   void onKeyAction(boolean pressed) {
     if (key != CODED) {
       switch (key) {
