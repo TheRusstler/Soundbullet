@@ -130,20 +130,20 @@ class Ship extends Scene {
    */
   void onKeyAction(boolean pressed) {
     if (key != CODED) {
-      switch (key) {
-      case 'a': 
+      switch (("" + key).toLowerCase()) {
+      case "a": 
         left = pressed;
         break;
-      case 'd':
+      case "d":
         right = pressed;
         break;
-      case 'w':
+      case "w":
         up = pressed;
         break;
-      case 's':
+      case "s":
         down = pressed;
         break;
-      case ' ':
+      case " ":
         space = pressed;
       default:
         break;

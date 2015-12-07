@@ -27,8 +27,24 @@ class PlanetMode extends Scene {
     noCursor();
 
     universeMusic.pause();
-    planet.song.track.cue(1000 * 180);
+    
+    skipStartOfTrack();
     planet.song.track.play();
+  }
+  
+  /*
+   * Skips the start of a track to avoid long intros and enforce a max time limit in planet-attack mode.
+   */
+  void skipStartOfTrack() {
+    // If track length is 1min 30or less, return.
+    if(planet.song.track.length() <= 90 * 1000) {
+      return;
+    }
+    
+    // If song is longer than 90 seconds, trim it to the last 90 seconds.
+    if(planet.song.track.length() > 90 * 1000) {
+      planet.song.track.skip(planet.song.track.length() - (90 * 1000));
+    }
   }
 
   void managePirates() {
